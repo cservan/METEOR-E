@@ -21,7 +21,7 @@ then, you can activate the module called "embeddings" (with the switch "m") and 
 
 Here is an example:
 
- java -jar meteor-1.5-DBnary-Embeddings -l fr -m 'exact stem paraphrase embeddings' -emb model.txt -embTh 0.85
+ java -jar meteor-1.5-DBnary-Embeddings test reference -l fr -m 'exact stem paraphrase embeddings' -emb model.txt -embTh 0.85
 
 ## References
 

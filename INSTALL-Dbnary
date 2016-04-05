@@ -1,0 +1,13 @@
+# Install the TreeTagger Tool 
+	sh ./install-TTG.sh 
+
+# Running Meteor
+sh ./runMeteor-1.5-Dbnary.sh -t <Test_Corpus> -r <Ref_Corpus> -l <Language> -d <synonym_path> -f <format_if_SGML>
+
+	Example (SGML file)
+sh runMeteor-1.5-Dbnary.sh -t  example/test.sgm -r example/ref.sgm -l en -d resources/synonym/english-synonym-Dbnary -f sgml
+
+	Example (TXT file)
+sh runMeteor-1.5-Dbnary.sh -t  example/test.txt -r example/ref.txt -l en -d resources/synonym/english-synonym-Dbnary
+	
+	

@@ -23,6 +23,10 @@ Here is an example:
 
 	java -jar meteor-1.5-DBnary-Embeddings test reference -l fr -m 'exact stem paraphrase embeddings' -emb model.txt -embTh 0.85
 
+## Acknowledgement
+
+This toolkit is part of the project KEHATH (https://kehath.imag.fr/) funded by the French National Research Agency.
+
 ## References
 
 When using this toolkit with Word Embeddings please cite:

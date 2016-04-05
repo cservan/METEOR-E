@@ -1,6 +1,6 @@
 # METEOR-E
 
-An enhanced version of the METEOR mectric (http://www.cs.cmu.edu/~alavie/METEOR/) with DBnary and Word Embeddings.
+An enhanced version of the METEOR metric V1.5 (http://www.cs.cmu.edu/~alavie/METEOR/) with DBnary and Word Embeddings.
 
 
 ## Language supported

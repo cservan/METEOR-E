@@ -26,10 +26,11 @@ Here is an example:
 
 ## TreeTagger & TT4J
 
-We propose to use TreeTagger jointly with this version of METEOR to extract lemmas and POS tags. The script called "get_treetagger.bash" will download, extract and install TreeTagger from http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/
+We propose to use TreeTagger jointly with this version of METEOR to extract lemmas and POS tags. The script called "get_treetagger.bash" will download, extract and install TreeTagger from http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/ </br>
 When you use TreeTagger, please cite:
 
-    Helmut Schmid (1994): Probabilistic Part-of-Speech Tagging Using Decision Trees. Proceedings of International Conference on New Methods in Language Processing, Manchester, UK.
+    Helmut Schmid, "Probabilistic Part-of-Speech Tagging Using Decision Trees". 
+    Proceedings of International Conference on New Methods in Language Processing, Manchester, UK, 1994.
 
 
 

@@ -12,7 +12,7 @@ DBnary:
  + Russian
  + German
 
-You can add all other language supported by DBnary (http://kaiko.getalp.org/about-dbnary/)
+You can add all other language supported by DBnary (http://kaiko.getalp.org/about-dbnary/
 
 ## How to use Embeddings data
 
@@ -22,6 +22,16 @@ then, you can activate the module called "embeddings" (with the switch "m") and 
 Here is an example:
 
 	java -jar meteor-1.5-DBnary-Embeddings test reference -l fr -m 'exact stem paraphrase embeddings' -emb model.txt -embTh 0.85
+
+
+## TreeTagger & TT4J
+
+We propose to use TreeTagger jointly with this version of METEOR to extract lemmas and POS tags. The script called "get_treetagger.bash" will download, extract and install TreeTagger from http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/
+When you use TreeTagger, please cite:
+
+    Helmut Schmid (1994): Probabilistic Part-of-Speech Tagging Using Decision Trees. Proceedings of International Conference on New Methods in Language Processing, Manchester, UK.
+
+
 
 ## References
 

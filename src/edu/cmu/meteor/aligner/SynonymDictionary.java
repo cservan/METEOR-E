@@ -97,8 +97,10 @@ public class SynonymDictionary {
          return hashLemma;
 }
        // hash LEMMA 
-        public Map hashLemma; // = hashCharge(); 
-      
+        public Map hashLemma; // = hashCharge();
+
+        // TreeTaggerWrapper 
+      public TreeTaggerWrapperClass ttw; 
 	// Exceptions
 	private Hashtable<String, ArrayList<String>> wordToBases;
 
@@ -107,6 +109,76 @@ public class SynonymDictionary {
 
 	// Relations
 	private Hashtable<Integer, HashSet<Integer>> setToRelations;
+
+	public SynonymDictionary(String language, URL excFileURL, URL synFileURL, URL relFileURL, TreeTaggerWrapperClass TTWClass)
+			throws IOException {
+		hashLemma = hashCharge(language);     
+		ttw = TTWClass;
+		wordToBases = new Hashtable<String, ArrayList<String>>();
+		wordToSynsets = new Hashtable<String, HashSet<Integer>>();
+		setToRelations = new Hashtable<Integer, HashSet<Integer>>();
+     
+                
+               
+		// Exception file
+		BufferedReader inExc = new BufferedReader(new InputStreamReader(
+				excFileURL.openStream(), "UTF-8"));
+		String base;
+		String line;
+                while ((base = inExc.readLine()) != null) {
+			line = inExc.readLine();
+			StringTokenizer tok = new StringTokenizer(line);
+			while (tok.hasMoreTokens()) {
+				String form = tok.nextToken();
+				ArrayList<String> bases = wordToBases.get(form);
+				if (bases == null) {
+					bases = new ArrayList<String>();
+					wordToBases.put(form, bases);
+				} 
+                                
+				bases.add(base);
+			}
+                        
+		}
+		inExc.close();
+		// Synset file
+		BufferedReader inSyn = new BufferedReader(new InputStreamReader(
+				synFileURL.openStream(), "UTF-8"));
+		String word;
+		while ((word = inSyn.readLine()) != null) {
+			HashSet<Integer> set = new HashSet<Integer>();
+			line = inSyn.readLine();
+			StringTokenizer tok = new StringTokenizer(line);
+			while (tok.hasMoreTokens())
+				set.add(Integer.parseInt(tok.nextToken()));
+			wordToSynsets.put(word, set); 
+		}
+		inSyn.close();
+
+		// Relation file
+
+		// No useful method for incorporating this data has yet been
+		// implemented, so there is no need to load the data file
+		boolean LOAD_DATA = false;
+
+		if (LOAD_DATA) {
+			BufferedReader inRel = new BufferedReader(new InputStreamReader(
+					relFileURL.openStream(), "UTF-8"));
+			String set;
+			while ((set = inRel.readLine()) != null) {
+				HashSet<Integer> relations = new HashSet<Integer>();
+				line = inRel.readLine();
+                       
+				StringTokenizer tok = new StringTokenizer(line);
+				while (tok.hasMoreTokens())
+					relations.add(Integer.parseInt(tok.nextToken()));
+				setToRelations.put(Integer.parseInt(set), relations);
+			}
+			inRel.close();
+		}else {
+                }
+
+	}
 
 	public SynonymDictionary(String language, URL excFileURL, URL synFileURL, URL relFileURL)
 			throws IOException {

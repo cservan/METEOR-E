@@ -12,6 +12,7 @@ package edu.cmu.meteor.aligner;
 import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.Iterator;
+import static java.util.Arrays.asList;
 
 public class SynonymMatcher {
 
@@ -23,6 +24,21 @@ public class SynonymMatcher {
 		Hashtable<Integer, HashSet<Integer>> string1Syn = new Hashtable<Integer, HashSet<Integer>>();
 		Hashtable<Integer, HashSet<Integer>> string2Syn = new Hashtable<Integer, HashSet<Integer>>();
 
+		System.err.println(a.words1.toArray(new String[a.words1.size()]));
+		System.err.println(a.words2.toArray(new String[a.words2.size()]));
+		if (synonyms.ttw != null )
+		{
+			String out1=synonyms.ttw.tag(new String[] {"This", "is", "a", "test", "."});
+			String out2=synonyms.ttw.tag(new String[] {"A", "test", "this", "is", "."});
+			System.err.println("OUT1 " + out1);
+			System.err.println("OUT2 " + out2);
+		}
+		else
+		{
+			System.err.println("synonyms.ttw Null !");
+			System.exit(0);
+		}
+		System.exit(0);
 		// Line 1
 		for (int i = 0; i < a.words1.size(); i++) {
 			HashSet<Integer> set = new HashSet<Integer>(synonyms

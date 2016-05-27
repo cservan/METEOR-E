@@ -12,7 +12,7 @@ package edu.cmu.meteor.aligner;
 public class ExactMatcher {
 
 	public static void match(int stage, Alignment a, Stage s) {
-                for (int i = 0; i < s.words1.length; i++) {
+/*                for (int i = 0; i < s.words1.length; i++) {
                 if (i != 0 ) { System.out.print(" "); } else {System.out.print("TOK1:\t");}
                 System.out.print(s.m_wordStrings1.get(i));
                 }
@@ -22,7 +22,7 @@ public class ExactMatcher {
                 System.out.print(s.m_wordStrings2.get(i));
                 }
                 System.out.print("\n");
-
+*/
 		// Simplest possible matcher: test all word keys for equality
 
 		for (int j = 0; j < s.words2.length; j++) {

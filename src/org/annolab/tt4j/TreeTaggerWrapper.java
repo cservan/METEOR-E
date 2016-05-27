@@ -21,8 +21,10 @@ package org.annolab.tt4j;
 import static java.util.Arrays.asList;
 import static org.annolab.tt4j.Util.join;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -141,6 +143,7 @@ class TreeTaggerWrapper<O>
 	private RingBuffer _lastInToken;
 	private RingBuffer _lastOutToken;
 	private String _lastOutRecord;
+	private String _StringOutput;
 	private int _restartCount = 0;
 
 	private boolean _performanceMode = false;
@@ -596,6 +599,7 @@ class TreeTaggerWrapper<O>
 		_lastOutToken = new RingBuffer(10);
 		_lastOutRecord = null;
 		_lastTokenWritten = null;
+		_StringOutput = "";
 
 		final Process taggerProc = getTaggerProcess();
 
@@ -640,14 +644,35 @@ class TreeTaggerWrapper<O>
 					}
 				}
 				// At the end make sure that no thread exited with an exception
+//				new String( bos.toByteArray(), "UTF-8");
+//				bos.toString( "UTF-8" );
+//				System.err.println("YOYO "+bos.toString( "UTF-8" ));
+//				System.err.println("YOYO "+taggerProc.toString( "UTF-8" ));
+//				System.err.println("YAYA "+writerThread.toString( "UTF-8" ));
 				checkThreads(reader, writer, gob);
 			}
 		}
 		finally {
 			gob.done();
 		}
+		try {
+//			ByteArrayInputStream bos = (ByteArrayInputStream)taggerProc.getInputStream();
+//			String theString = IOUtils.toString(inputStream, encoding);
+//			PrintWriter test = writer.getPrintWriter();
+			System.err.println("YOYO "+_StringOutput);
+			
+		}
+		catch (Exception uee)
+		{	
+			System.err.println("Bah ça marche pas !!!!!");
+		}
 
 //		info("Parsed " + count + " pos segments");
+	}
+	
+	public
+	String getOutput() {
+		return _StringOutput;
 	}
 
 	private
@@ -1007,6 +1032,7 @@ class TreeTaggerWrapper<O>
                         // exception.
                         _lastOutToken.add(outToken);
                         _lastOutRecord = outRecord;
+                        _StringOutput += outRecord+"\n";
 
                         // Get original token segment
                         O inToken = getNextToken(outToken);
@@ -1162,5 +1188,9 @@ class TreeTaggerWrapper<O>
 		{
 			return _exception;
 		}
+    	public 
+    	PrintWriter getPrintWriter() {
+    		return this._pw;
+    	}
     }
 }

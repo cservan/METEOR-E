@@ -40,6 +40,7 @@ public class Aligner {
 	private int beamSize;
 
 	private Stemmer stemmer;
+	private TreeTaggerWrapperClass ttWrapperClass;
 	private Lib_distance distance;
 	private double embeddingsThreshold;
 	private SynonymDictionary synonyms;
@@ -169,6 +170,7 @@ public class Aligner {
 		this.modules = new ArrayList<Integer>(aligner.modules);
 		this.moduleWeights = new ArrayList<Double>(aligner.moduleWeights);
 		this.partialComparator = aligner.partialComparator;
+		this.ttWrapperClass = new TreeTaggerWrapperClass(this.language, "treetagger/lib/");
 		for (int module : this.modules) {
 			if (module == Constants.MODULE_STEM) {
 				// Each aligner needs its own stemmer
@@ -193,6 +195,7 @@ public class Aligner {
 		this.moduleCount = modules.size();
 		this.modules = modules;
 		this.moduleWeights = new ArrayList<Double>();
+		this.ttWrapperClass = new TreeTaggerWrapperClass(this.language, "treetagger/lib/");
 		for (int i = 0; i < this.modules.size(); i++) {
 			int module = this.modules.get(i);
 			if (module == Constants.MODULE_EXACT) {
@@ -212,7 +215,7 @@ public class Aligner {
 					
                                        
                                        this.synonyms = new SynonymDictionary( this.language, excFileURL,
-							synFileURL, relFileURL);
+							synFileURL, relFileURL, this.ttWrapperClass);
 				} catch (IOException ex) {
 					throw new RuntimeException(
 							"Error: Synonym dictionary could not be loaded ("
@@ -244,6 +247,7 @@ public class Aligner {
 		this.moduleCount = modules.size();
 		this.modules = modules;
 		this.moduleWeights = new ArrayList<Double>();
+		this.ttWrapperClass = new TreeTaggerWrapperClass(this.language, "treetagger/lib/");
 		for (int i = 0; i < this.modules.size(); i++) {
 			int module = this.modules.get(i);
 			if (module == Constants.MODULE_EXACT) {
@@ -263,7 +267,7 @@ public class Aligner {
 					
                                        
                                        this.synonyms = new SynonymDictionary( this.language, excFileURL,
-							synFileURL, relFileURL);
+							synFileURL, relFileURL, this.ttWrapperClass);
 				} catch (IOException ex) {
 					throw new RuntimeException(
 							"Error: Synonym dictionary could not be loaded ("
@@ -330,6 +334,7 @@ public class Aligner {
 				&& Arrays.equals(s.words1, s.words2)) {
 			modsUsed = 1;
 		}
+		
 
 		// For each module
 		for (int modNum = 0; modNum < modsUsed; modNum++) {

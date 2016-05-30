@@ -712,6 +712,19 @@ public class Meteor {
 				curArg += 2;
 			} else if (args[curArg].equals("-emb")) {
 				props.setProperty("w2vFile", args[curArg + 1]);
+				props.setProperty("embType", "0");
+				curArg += 2;
+			} else if (args[curArg].equals("-embLemma")) {
+				props.setProperty("w2vFile", args[curArg + 1]);
+				props.setProperty("embType", "1");
+				curArg += 2;
+			} else if (args[curArg].equals("-embWord_POS")) {
+				props.setProperty("w2vFile", args[curArg + 1]);
+				props.setProperty("embType", "2");
+				curArg += 2;
+			} else if (args[curArg].equals("-embLemma_POS")) {
+				props.setProperty("w2vFile", args[curArg + 1]);
+				props.setProperty("embType", "3");
 				curArg += 2;
 			} else if (args[curArg].equals("-embTh")) {
 				props.setProperty("w2vThreshold", args[curArg + 1]);
@@ -807,8 +820,14 @@ public class Meteor {
 				.println("-s wordListFile                 (if not default for language)");
 		System.err
 				.println("-d synonymDirectory             (if not default for language)");
-                System.err
-                                .println("-emb embeddingsModelFile        specify the embeddings model in text format (if not default for language)");
+        System.err
+        .println("-emb embeddingsModelFile        specify the embeddings model in text format (if not default for language)");
+        System.err
+        .println("-embLemma embeddingsModelFile        specify the embeddings model in text format based on lemmas (if not default for language)");
+        System.err
+        .println("-embWord_POS embeddingsModelFile        specify the embeddings model in text format based on bot word and POS like \"is_VB\" (if not default for language)");
+        System.err
+        .println("-embLemma_POS embeddingsModelFile        specify the embeddings model in text format based on bot lemma and POS like \"be_VB\" (if not default for language)");
                 System.err
                                 .println("-embTh float                    specify the threshold alignment decision with embeddings (default is 0.8)");
 		System.err

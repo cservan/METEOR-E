@@ -599,7 +599,7 @@ class TreeTaggerWrapper<O>
 		_lastOutToken = new RingBuffer(10);
 		_lastOutRecord = null;
 		_lastTokenWritten = null;
-		_StringOutput = "";
+		_StringOutput = new String("");
 
 		final Process taggerProc = getTaggerProcess();
 
@@ -644,27 +644,11 @@ class TreeTaggerWrapper<O>
 					}
 				}
 				// At the end make sure that no thread exited with an exception
-//				new String( bos.toByteArray(), "UTF-8");
-//				bos.toString( "UTF-8" );
-//				System.err.println("YOYO "+bos.toString( "UTF-8" ));
-//				System.err.println("YOYO "+taggerProc.toString( "UTF-8" ));
-//				System.err.println("YAYA "+writerThread.toString( "UTF-8" ));
 				checkThreads(reader, writer, gob);
 			}
 		}
 		finally {
 			gob.done();
-		}
-		try {
-//			ByteArrayInputStream bos = (ByteArrayInputStream)taggerProc.getInputStream();
-//			String theString = IOUtils.toString(inputStream, encoding);
-//			PrintWriter test = writer.getPrintWriter();
-			System.err.println("YOYO "+_StringOutput);
-			
-		}
-		catch (Exception uee)
-		{	
-			System.err.println("Bah ça marche pas !!!!!");
 		}
 
 //		info("Parsed " + count + " pos segments");
@@ -1155,7 +1139,7 @@ class TreeTaggerWrapper<O>
     			final OutputStream os = _proc.getOutputStream();
 
     			_pw = new PrintWriter(new BufferedWriter(
-    			    new OutputStreamWriter(os, _model.getEncoding())));
+        			    new OutputStreamWriter(os, _model.getEncoding())));
 
     			send(STARTOFTEXT);
 

@@ -52,7 +52,7 @@ public class EmbeddingsMatcher {
 				}
 				else
 				{
-					double l_prob = d.getSimilarityProb(s.m_wordStrings1.get(i),s.m_wordStrings2.get(j));
+					double l_prob = d.getSimilarityProb(a.words1.get(i),a.words2.get(j));
 					if (l_prob >= threshold)
 					{
 							
@@ -76,4 +76,73 @@ public class EmbeddingsMatcher {
 			}
 		}
 	}
+	public static void match(int stage, Alignment a, Stage s, Lib_distance d, double threshold, int type) {
+
+		// Simplest possible matcher: test all word keys for equality
+
+		for (int j = 0; j < s.words2.length; j++) {
+
+			for (int i = 0; i < s.words1.length; i++) {
+
+				// Match
+				if (s.words1[i] == s.words2[j]) {
+
+					Match m = new Match();
+					m.module = stage;
+					m.prob = 1;
+					m.start = j;
+					m.length = 1;
+					m.matchStart = i;
+					m.matchLength = 1;
+
+					// Add this match to the list of matches and mark coverage
+/*					System.err.println(s.m_wordStrings1.get(i));
+					System.err.println(s.m_wordStrings2.get(j));
+					System.err.println("1.0");*/
+					s.matches.get(j).add(m);
+					s.line1Coverage[i]++;
+					s.line2Coverage[j]++;
+				}
+				else
+				{
+					double l_prob = 0.0;
+					switch(type)
+					{
+					case 0:
+						l_prob = d.getSimilarityProb(a.words1.get(i),a.words2.get(j));
+						break;
+					case 1:
+						l_prob = d.getSimilarityProb(a.lemma1.get(i),a.lemma2.get(j));
+						break;
+					case 2:
+						l_prob = d.getSimilarityProb(a.words1.get(i)+"_"+a.POS1.get(i),a.words2.get(j)+"_"+a.POS2.get(j));
+						break;
+					case 3:
+						l_prob = d.getSimilarityProb(a.lemma1.get(i)+"_"+a.POS1.get(i),a.lemma2.get(j)+"_"+a.POS2.get(j));
+						break;
+					}
+					
+					if (l_prob >= threshold)
+					{
+							
+							Match m = new Match();
+							m.module = stage;
+/*							System.err.println(s.m_wordStrings1.get(i));
+							System.err.println(s.m_wordStrings2.get(j));
+							System.err.println(l_prob);*/
+							m.prob = l_prob; 
+							m.start = j;
+							m.length = 1;
+							m.matchStart = i;
+							m.matchLength = 1;
+		
+							// Add this match to the list of matches and mark coverage
+							s.matches.get(j).add(m);
+							s.line1Coverage[i]++;
+							s.line2Coverage[j]++;
+					}
+				}
+			}
+		}
+	}	
 }

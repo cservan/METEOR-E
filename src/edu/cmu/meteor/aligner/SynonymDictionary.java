@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.StringTokenizer;
+import java.util.Vector;
 
 import java.io.BufferedReader;
 import java.io.FileWriter;
@@ -112,7 +113,7 @@ public class SynonymDictionary {
 
 	public SynonymDictionary(String language, URL excFileURL, URL synFileURL, URL relFileURL, TreeTaggerWrapperClass TTWClass)
 			throws IOException {
-		hashLemma = hashCharge(language);     
+		//hashLemma = hashCharge(language);     
 		ttw = TTWClass;
 		wordToBases = new Hashtable<String, ArrayList<String>>();
 		wordToSynsets = new Hashtable<String, HashSet<Integer>>();

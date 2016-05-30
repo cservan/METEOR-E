@@ -18,10 +18,6 @@ public class Stage {
 	public int[] words1;
 	public int[] words2;
 	
-	// Word strings (added for word embeddings)
-	public ArrayList<String> m_wordStrings1;
-	public ArrayList<String> m_wordStrings2;
-
 	// List of matches for each start index
 	public ArrayList<ArrayList<Match>> matches;
 
@@ -32,8 +28,8 @@ public class Stage {
 	Stage(ArrayList<String> wordStrings1, ArrayList<String> wordStrings2) {
 		words1 = wordsToKeys(wordStrings1);
 		words2 = wordsToKeys(wordStrings2);
-		m_wordStrings1 = wordStrings1;
-		m_wordStrings2 = wordStrings2;
+		//m_wordStrings1 = wordStrings1;
+		//m_wordStrings2 = wordStrings2;
 
 		matches = new ArrayList<ArrayList<Match>>();
 		for (int i = 0; i < words2.length; i++)

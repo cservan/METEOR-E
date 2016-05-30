@@ -19,6 +19,14 @@ public class Alignment {
 	public ArrayList<String> words1;
 	public ArrayList<String> words2;
 
+	// POS in strings
+	public ArrayList<String> POS1;
+	public ArrayList<String> POS2;
+
+	// Lemmas in strings
+	public ArrayList<String> lemma1;
+	public ArrayList<String> lemma2;
+
 	// Function word indices
 	public HashSet<Integer> line1FunctionWords;
 	public HashSet<Integer> line2FunctionWords;

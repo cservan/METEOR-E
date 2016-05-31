@@ -61,7 +61,7 @@ public class SynonymMatcher {
 //						System.err.print(j);
 //						System.err.print("\t");
 //						System.err.println("POS "+_tabout1[j]);
-						a.POS1.add(_tabout1[j]);
+						a.POS1.add((String)synonyms.ttw.hashTTPOS2UPOS.get(_tabout1[j]));
 					}
 					if ((j+1) % 3 == 0)
 					{
@@ -84,7 +84,7 @@ public class SynonymMatcher {
 /*						System.err.print(j);
 						System.err.print("\t");
 						System.err.println("POS "+_tabout2[j]);*/
-						a.POS2.add(_tabout2[j]);
+						a.POS2.add((String)synonyms.ttw.hashTTPOS2UPOS.get(_tabout2[j]));
 					}
 					if ((j+1) % 3 == 0)
 					{

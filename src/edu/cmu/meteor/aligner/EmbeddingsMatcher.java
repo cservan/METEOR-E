@@ -23,7 +23,7 @@ import edu.lig.multivec.util.Lib_distance;
 
 public class EmbeddingsMatcher {
 
-	public static void match(int stage, Alignment a, Stage s, Lib_distance d, double threshold) {
+/*	public static void match(int stage, Alignment a, Stage s, Lib_distance d, double threshold) {
 
 		// Simplest possible matcher: test all word keys for equality
 
@@ -43,9 +43,6 @@ public class EmbeddingsMatcher {
 					m.matchLength = 1;
 
 					// Add this match to the list of matches and mark coverage
-/*					System.err.println(s.m_wordStrings1.get(i));
-					System.err.println(s.m_wordStrings2.get(j));
-					System.err.println("1.0");*/
 					s.matches.get(j).add(m);
 					s.line1Coverage[i]++;
 					s.line2Coverage[j]++;
@@ -58,9 +55,6 @@ public class EmbeddingsMatcher {
 							
 							Match m = new Match();
 							m.module = stage;
-/*							System.err.println(s.m_wordStrings1.get(i));
-							System.err.println(s.m_wordStrings2.get(j));
-							System.err.println(l_prob);*/
 							m.prob = l_prob; 
 							m.start = j;
 							m.length = 1;
@@ -75,7 +69,7 @@ public class EmbeddingsMatcher {
 				}
 			}
 		}
-	}
+	}*/
 	public static void match(int stage, Alignment a, Stage s, Lib_distance d, double threshold, int type) {
 
 		// Simplest possible matcher: test all word keys for equality
@@ -106,6 +100,7 @@ public class EmbeddingsMatcher {
 				else
 				{
 					double l_prob = 0.0;
+					System.err.println(type);
 					switch(type)
 					{
 					case 0:
@@ -115,6 +110,8 @@ public class EmbeddingsMatcher {
 						l_prob = d.getSimilarityProb(a.lemma1.get(i),a.lemma2.get(j));
 						break;
 					case 2:
+						System.err.println(a.words1.get(i)+"_"+a.POS1.get(i));
+						System.err.println(a.words2.get(j)+"_"+a.POS2.get(j));
 						l_prob = d.getSimilarityProb(a.words1.get(i)+"_"+a.POS1.get(i),a.words2.get(j)+"_"+a.POS2.get(j));
 						break;
 					case 3:

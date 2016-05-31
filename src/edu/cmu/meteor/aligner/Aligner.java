@@ -43,6 +43,7 @@ public class Aligner {
 	private TreeTaggerWrapperClass ttWrapperClass;
 	private Lib_distance distance;
 	private double embeddingsThreshold;
+	private int embeddingsType;
 	private SynonymDictionary synonyms;
 	private ParaphraseTransducer paraphrase;
 	private HashSet<String> functionWords;
@@ -170,6 +171,8 @@ public class Aligner {
 		this.modules = new ArrayList<Integer>(aligner.modules);
 		this.moduleWeights = new ArrayList<Double>(aligner.moduleWeights);
 		this.partialComparator = aligner.partialComparator;
+		this.embeddingsThreshold = aligner.embeddingsThreshold; 
+		this.embeddingsType = aligner.embeddingsType; 
 		this.ttWrapperClass = new TreeTaggerWrapperClass(this.language, "treetagger/lib/");
 		for (int module : this.modules) {
 			if (module == Constants.MODULE_STEM) {
@@ -357,7 +360,7 @@ public class Aligner {
 				ParaphraseMatcher.match(modNum, a, s, paraphrase);
 			} else if (matcher == Constants.MODULE_EMBEDDINGS) {
 				// Embeddings need the embeddings file
-				EmbeddingsMatcher.match(modNum, a, s, distance, embeddingsThreshold);
+				EmbeddingsMatcher.match(modNum, a, s, distance, embeddingsThreshold, embeddingsType);
 			} else {
 				throw new RuntimeException("Matcher not recognized: " + matcher);
 			}
@@ -696,5 +699,11 @@ public class Aligner {
 	}
 	public void setEmbeddingsThreshold(double threshold) {
 		this.embeddingsThreshold = threshold;
+	}
+	public void setEmbeddingsType(int embType) {
+		this.embeddingsType = embType;
+	}
+	public int getEmbeddingsType() {
+		return this.embeddingsType;
 	}
 }

@@ -48,6 +48,7 @@ public class MeteorConfiguration {
 	private URL synDirURL;
 	private URL paraDirURL;
 	private URL embeddingsURL;
+	private int embeddingsType;
 	private boolean charBased;
 	private double embeddingsThreshold;
 
@@ -243,8 +244,15 @@ public class MeteorConfiguration {
 	public URL getParaDirURL() {
 		return paraDirURL;
 	}
-	public URL getembeddingsURL() {
+	public URL getEmbeddingsURL() {
 		return embeddingsURL;
+	}
+
+	public void setEmbeddingsType(int embeddingsType) {
+		this.embeddingsType = embeddingsType;
+	}
+	public int getEmbeddingsType() {
+		return embeddingsType;
 	}
 
 	public void setParaFileURL(URL paraDirURL) {
@@ -401,21 +409,33 @@ public class MeteorConfiguration {
 			}
 
 		// Embeddings file
-		String w2vFile = (props.getProperty("w2vFile"));
-		if (w2vFile != null)
+		String embFile = (props.getProperty("embFile"));
+		if (embFile != null)
 			try {
 				// This should not ever throw a malformed url exception
-				setEmbeddingsURL((new File(w2vFile)).toURI().toURL());
+				setEmbeddingsURL((new File(embFile)).toURI().toURL());
 			} catch (MalformedURLException ex) {
 				System.err.println("Error: word2vec file URL NOT set");
 				ex.printStackTrace();
 			}
 
 		// Embeddings threshold
-		String w2vEmbThrString = (props.getProperty("w2vThreshold"));
-		if (w2vEmbThrString != null) {
-				setEmbeddingsThreshold(Double.parseDouble(w2vEmbThrString));
+		String embThrString = (props.getProperty("embThreshold"));
+		if (embThrString != null) {
+				setEmbeddingsThreshold(Double.parseDouble(embThrString));
 		}
+
+		// Embeddings Type
+		String embTypeStr = (props.getProperty("embType"));
+		if (embTypeStr != null) {
+				System.err.println(embTypeStr);
+				System.err.println(Integer.parseInt(embTypeStr));
+				setEmbeddingsType(Integer.parseInt(embTypeStr));
+		}
+		System.err.println("On est là BIS !");
+		System.err.println(props.getProperty("embType"));
+		System.err.println(embTypeStr);
+		System.err.println(getEmbeddingsType());
 
 		// Normalization
 		Boolean norm = Boolean.parseBoolean(props.getProperty("norm"));

@@ -102,11 +102,15 @@ public class MeteorScorer {
 		aligner = new Aligner(language, config.getModules(),
 				config.getModuleWeights(), config.getBeamSize(),
 				config.getWordFileURL(), config.getSynDirURL(),
-				config.getParaDirURL(), config.getembeddingsURL(), 
+				config.getParaDirURL(), config.getEmbeddingsURL(),
 				// Best alignments for evaluation
 				Constants.PARTIAL_COMPARE_TOTAL);
 		// Best weights for evaluation
 		aligner.setEmbeddingsThreshold(config.getEmbeddingsThreshold());
+		aligner.setEmbeddingsType(config.getEmbeddingsType());
+		System.err.println("On est là !");
+		System.err.println(config.getEmbeddingsType());
+		System.err.println(aligner.getEmbeddingsType());
 		ArrayList<Integer> modules = config.getModules();
 		ArrayList<Double> setWeights = new ArrayList<Double>();
 		for (int module : modules) {

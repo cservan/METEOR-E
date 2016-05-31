@@ -1,6 +1,12 @@
 package edu.cmu.meteor.aligner;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.Map;
+
 import static java.util.Arrays.asList;
 
 import org.annolab.tt4j.*;
@@ -26,6 +32,7 @@ public class TreeTaggerWrapperClass {
 	     tt.destroy();
 	 }
 	 */
+	public Map<String, String> hashTTPOS2UPOS;
 	private TreeTaggerWrapper<String> tt;
 
 	public TreeTaggerWrapperClass(TreeTaggerWrapperClass tagger) {
@@ -50,6 +57,31 @@ public class TreeTaggerWrapperClass {
 		catch (final IOException e) {
 			System.err.println("File model: "+libPath+"/"+lang+"-utf8.par does not exist, please check your TreeTagger installation");
 		}
+        hashTTPOS2UPOS = new java.util.HashMap<String,String>();
+        try { 
+            // output of TTG
+        	//System.err.println("Loading dictionnary: ./resources/TreeTagger2UniversalPOS/UnivTag."+lang);
+        	InputStream inputFlux=new FileInputStream("./resources/TreeTagger2UniversalPOS/UnivTag."+lang); 
+            InputStreamReader lecture=new InputStreamReader(inputFlux);
+            BufferedReader buff=new BufferedReader(lecture);
+            String line;
+            //int l_cptWL=0;
+
+           while ((line=buff.readLine())!=null){
+        	   if ((line.split("\t").length) > 1)
+        	   {
+                 String POSTT = line.split("\t")[0];
+                 String POSUT = line.split("\t")[1];
+                 hashTTPOS2UPOS.put(POSTT,POSUT);
+             //    l_cptWL++;
+        	   }
+
+             }
+           //System.err.println(l_cptWL);
+           buff.close();
+         } catch (IOException ex) {
+ 			System.err.println("File ./resources/TreeTagger2UniversalPOS."+lang+"does not exist, please check your paths.");
+         }
 	}
 	
 
@@ -75,4 +107,7 @@ public class TreeTaggerWrapperClass {
 		}
 		return to_return;
 	}
+    public void hashCharge(String language){
+        
+    }
 }

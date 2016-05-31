@@ -711,19 +711,19 @@ public class Meteor {
 				props.setProperty("wordFile", args[curArg + 1]);
 				curArg += 2;
 			} else if (args[curArg].equals("-emb")) {
-				props.setProperty("w2vFile", args[curArg + 1]);
+				props.setProperty("embFile", args[curArg + 1]);
 				props.setProperty("embType", "0");
 				curArg += 2;
 			} else if (args[curArg].equals("-embLemma")) {
-				props.setProperty("w2vFile", args[curArg + 1]);
+				props.setProperty("embFile", args[curArg + 1]);
 				props.setProperty("embType", "1");
 				curArg += 2;
 			} else if (args[curArg].equals("-embWord_POS")) {
-				props.setProperty("w2vFile", args[curArg + 1]);
+				props.setProperty("embFile", args[curArg + 1]);
 				props.setProperty("embType", "2");
 				curArg += 2;
 			} else if (args[curArg].equals("-embLemma_POS")) {
-				props.setProperty("w2vFile", args[curArg + 1]);
+				props.setProperty("embFile", args[curArg + 1]);
 				props.setProperty("embType", "3");
 				curArg += 2;
 			} else if (args[curArg].equals("-embTh")) {

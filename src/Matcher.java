@@ -49,7 +49,7 @@ public class Matcher {
 			System.out
 					.println("-a paraphraseFile               (if not default)");
 			System.out
-					.println("-w2v word2vec vector model      (needed to use word embeddings)");
+					.println("-emb embedding vector model      (needed to use word embeddings)");
 			System.out
 					.println("-stdio                          Read lines from stdin");
 			System.out
@@ -83,8 +83,8 @@ public class Matcher {
 			} else if (args[curArg].equals("-a")) {
 				props.setProperty("paraFile", args[curArg + 1]);
 				curArg += 2;
-			} else if (args[curArg].equals("-w2v")) {
-				props.setProperty("w2vFile", args[curArg + 1]);
+			} else if (args[curArg].equals("-emb")) {
+				props.setProperty("embFile", args[curArg + 1]);
 				curArg += 2;
 			} else if (args[curArg].equals("-m")) {
 				props.setProperty("modules", args[curArg + 1]);
@@ -124,15 +124,16 @@ public class Matcher {
 		else
 			paraURL = (new File(paraFile)).toURI().toURL();
 
-		// Paraphrase Location
-		String w2vFile = props.getProperty("w2vFile");
-		URL w2vURL;
-		if (w2vFile == null)
-			w2vURL = null;
-// 			Constants.getDefaultW2vFileURL(Constants
+		// Embeddings Location
+		String embFile = props.getProperty("embFile");
+		System.err.println("EMB "+ embFile);
+		URL embURL;
+		if (embFile == null)
+			embURL = null;
+// 			Constants.getDefaultembFileURL(Constants
 // 					.getLanguageID(language));
 		else
-			w2vURL = (new File(paraFile)).toURI().toURL();
+			embURL = (new File(paraFile)).toURI().toURL();
 
 		// Max Computations
 		String beam = props.getProperty("beamSize");
@@ -193,10 +194,10 @@ public class Matcher {
 		// Construct aligner
 		
 		Aligner aligner;
-		if (w2vFile != null) {
+		if (embFile != null) {
 			aligner = new Aligner(language, modules, moduleWeights,
 				beamSize, Constants.getDefaultWordFileURL(Constants
-						.getLanguageID(language)), synURL, paraURL, w2vURL,
+						.getLanguageID(language)), synURL, paraURL, embURL,
 				partialComparator);
 				
 			}

@@ -108,9 +108,6 @@ public class MeteorScorer {
 		// Best weights for evaluation
 		aligner.setEmbeddingsThreshold(config.getEmbeddingsThreshold());
 		aligner.setEmbeddingsType(config.getEmbeddingsType());
-		System.err.println("On est là !");
-		System.err.println(config.getEmbeddingsType());
-		System.err.println(aligner.getEmbeddingsType());
 		ArrayList<Integer> modules = config.getModules();
 		ArrayList<Double> setWeights = new ArrayList<Double>();
 		for (int module : modules) {

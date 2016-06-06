@@ -428,14 +428,8 @@ public class MeteorConfiguration {
 		// Embeddings Type
 		String embTypeStr = (props.getProperty("embType"));
 		if (embTypeStr != null) {
-				System.err.println(embTypeStr);
-				System.err.println(Integer.parseInt(embTypeStr));
 				setEmbeddingsType(Integer.parseInt(embTypeStr));
 		}
-		System.err.println("On est là BIS !");
-		System.err.println(props.getProperty("embType"));
-		System.err.println(embTypeStr);
-		System.err.println(getEmbeddingsType());
 
 		// Normalization
 		Boolean norm = Boolean.parseBoolean(props.getProperty("norm"));

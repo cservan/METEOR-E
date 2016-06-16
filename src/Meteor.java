@@ -726,6 +726,10 @@ public class Meteor {
 				props.setProperty("embFile", args[curArg + 1]);
 				props.setProperty("embType", "3");
 				curArg += 2;
+			} else if (args[curArg].equals("-embWord_Lemma")) {
+				props.setProperty("embFile", args[curArg + 1]);
+				props.setProperty("embType", "4");
+				curArg += 2;
 			} else if (args[curArg].equals("-embTh")) {
 				props.setProperty("embThreshold", args[curArg + 1]);
 				curArg += 2;

@@ -110,12 +110,13 @@ public class EmbeddingsMatcher {
 						l_prob = d.getSimilarityProb(a.lemma1.get(i),a.lemma2.get(j));
 						break;
 					case 2:
-//						System.err.println(a.words1.get(i)+"_"+a.POS1.get(i));
-//						System.err.println(a.words2.get(j)+"_"+a.POS2.get(j));
 						l_prob = d.getSimilarityProb(a.words1.get(i)+"_"+a.POS1.get(i),a.words2.get(j)+"_"+a.POS2.get(j));
 						break;
 					case 3:
 						l_prob = d.getSimilarityProb(a.lemma1.get(i)+"_"+a.POS1.get(i),a.lemma2.get(j)+"_"+a.POS2.get(j));
+						break;
+					case 4:
+						l_prob = d.getSimilarityProb(a.words1.get(i)+"_"+a.lemma1.get(i),a.words2.get(j)+"_"+a.lemma2.get(j));
 						break;
 					}
 					

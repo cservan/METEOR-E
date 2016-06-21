@@ -32,7 +32,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
   
 public class SynonymDictionary {
-    
+/*    
     public Map hashCharge(){
         
         java.util.Map hashLemma = new java.util.HashMap();
@@ -99,7 +99,7 @@ public class SynonymDictionary {
 }
        // hash LEMMA 
         public Map hashLemma; // = hashCharge();
-
+*/
         // TreeTaggerWrapper 
       public TreeTaggerWrapperClass ttw; 
 	// Exceptions
@@ -183,7 +183,7 @@ public class SynonymDictionary {
 
 	public SynonymDictionary(String language, URL excFileURL, URL synFileURL, URL relFileURL)
 			throws IOException {
-		hashLemma = hashCharge(language);     
+//		hashLemma = hashCharge(language);     
 		wordToBases = new Hashtable<String, ArrayList<String>>();
 		wordToSynsets = new Hashtable<String, HashSet<Integer>>();
 		setToRelations = new Hashtable<Integer, HashSet<Integer>>();
@@ -260,7 +260,7 @@ public class SynonymDictionary {
                 
 		return new HashSet<Integer>();
 	}
-
+/*
 	public HashSet<Integer> getStemSynSets(String language,String word) {
 		ArrayList<String> bases = wordToBases.get(word);
 		if (bases != null) {
@@ -279,6 +279,7 @@ public class SynonymDictionary {
            
                      
 	}
+	*/
 //NOT USED ...............
 	public HashSet<Integer> getRelations(int set) {
                  HashSet<Integer> relations = setToRelations.get(set);
@@ -350,7 +351,7 @@ private String morphEN(String word) {
  
       
         
-   
+   /*
         private String morph(String word) { 
              Object Lemma = hashLemma.get(word);    
             if(Lemma !=null){ 
@@ -360,7 +361,7 @@ private String morphEN(String word) {
                  } 
             return "";
         }
-        
+     */   
 }
 
 /*

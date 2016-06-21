@@ -23,7 +23,6 @@ Here is an example:
 
 	java -jar meteor-1.5-DBnary-Embeddings test reference -l fr -m 'exact stem paraphrase embeddings' -emb model.txt -embTh 0.85
 
-<<<<<<< HEAD
 
 ## TreeTagger & TT4J
 
@@ -37,7 +36,6 @@ When you use TreeTagger, please cite:
 ## Acknowledgement
 
 This toolkit is part of the project KEHATH (https://kehath.imag.fr/) funded by the French National Research Agency.
->>>>>>> 03d6875172588427f9f40b5edb7f1f8cc7cc4391
 
 ## References
 

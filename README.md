@@ -1,6 +1,6 @@
 # METEOR-E
 
-An enhanced version of the METEOR mectric (http://www.cs.cmu.edu/~alavie/METEOR/) with DBnary and Word Embeddings.
+An enhanced version of the METEOR metric V1.5 (http://www.cs.cmu.edu/~alavie/METEOR/) with DBnary and Word Embeddings.
 
 
 ## Language supported
@@ -23,6 +23,7 @@ Here is an example:
 
 	java -jar meteor-1.5-DBnary-Embeddings test reference -l fr -m 'exact stem paraphrase embeddings' -emb model.txt -embTh 0.85
 
+<<<<<<< HEAD
 
 ## TreeTagger & TT4J
 
@@ -32,6 +33,11 @@ When you use TreeTagger, please cite:
  + Probabilistic Part-of-Speech Tagging Using Decision Trees – Helmut Schmid, Proceedings of International Conference on New Methods in Language Processing, Manchester, UK, 1994.
 
 
+=======
+## Acknowledgement
+
+This toolkit is part of the project KEHATH (https://kehath.imag.fr/) funded by the French National Research Agency.
+>>>>>>> 03d6875172588427f9f40b5edb7f1f8cc7cc4391
 
 ## References
 

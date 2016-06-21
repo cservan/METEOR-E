@@ -32,7 +32,6 @@ When you use TreeTagger, please cite:
  + Probabilistic Part-of-Speech Tagging Using Decision Trees – Helmut Schmid, Proceedings of International Conference on New Methods in Language Processing, Manchester, UK, 1994.
 
 
-=======
 ## Acknowledgement
 
 This toolkit is part of the project KEHATH (https://kehath.imag.fr/) funded by the French National Research Agency.

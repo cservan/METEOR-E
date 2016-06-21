@@ -12,7 +12,7 @@ DBnary:
  + Russian
  + German
 
-You can add all other language supported by DBnary (http://kaiko.getalp.org/about-dbnary/
+You can add all other language supported by DBnary (http://kaiko.getalp.org/about-dbnary/)
 
 ## How to use Embeddings data
 

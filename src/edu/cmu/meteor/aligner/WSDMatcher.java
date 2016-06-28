@@ -53,134 +53,149 @@ public class WSDMatcher
     private static InputStruct test = new InputStruct();
     
     private static InputStruct reference = new InputStruct();
-    /*
+    
     private static class DisambiguationCache
     {
-        private static String cacheFile = "wsd_cache.txt";
-        private static String cacheFileN = "wsd_cache_n.txt";
-        private static Map<String, InputStruct> cache = new HashMap<>();
-        List<String> get3(Scanner sc)
-        {
-            int nbWords = sc.nextInt();
-            List<String> words = new ArrayList<>(nbWords);
-            for (int k = 0 ; k < nbWords ; k++)
-            {
-                words.add(sc.next());
-            }
-            return words;
-        }
-        List<List<String>> get2(Scanner sc)
-        {
-            int nbLines = sc.nextInt();
-            List<List<String>> lines = new ArrayList<>(nbLines);
-            for (int j = 0 ; j < nbLines ; j++)
-            {
-                lines.add(get3(sc));
-            }
-            return lines;
-        }
-        List<String> get1(Scanner sc)
-        {
-            int nbLines = sc.nextInt();
-            sc.nextLine();
-            List<String> lines = new ArrayList<>(nbLines);
-            for (int j = 0 ; j < nbLines ; j++)
-            {
-                lines.add(sc.nextLine());
-            }
-            return lines;
-        }
-        String concatenation(List<String> lines)
-        {
-            String concat = "";
-            for (String line : lines) concat += line;
-            return concat.trim();
-        }
-        void put3(List<String> words, PrintWriter pw)
-        {
-            pw.print(words.size() + " ");
-            for (String word : words) pw.print(word + " ");
-            pw.println();
-        }
-        void put2(List<List<String>> lines, PrintWriter pw)
-        {
-            pw.println(lines.size());
-            for (List<String> line : lines) put3(line, pw);
-        }
-        void put1(List<String> lines, PrintWriter pw)
-        {
-            pw.println(lines.size());
-            for (String line : lines) pw.println(line);
-        }
+        private static String cacheDirPath = "resources/wsd/cache";
+
+        private static String cacheIndexFilePath = cacheDirPath + "/index.txt";
+
+        private static Map<String, Integer> index = new HashMap<>();
+        
+        private static Map<Integer, List<List<String>>> cache = new HashMap<>();
+        
         public DisambiguationCache()
         {
+        	index = loadIndex();
+        	if (verbose) System.err.println(index.size() + " texts in cache");
+        	cache = loadCache(index);
+        }
+        
+        private Map<String, Integer> loadIndex()
+        {
+        	Map<String, Integer> ret = new HashMap<>();
             try 
             {
-                Scanner sc = new Scanner(new File(cacheFileN));
-                int nbFiles = sc.nextInt();
-                if (verbose) System.err.println(nbFiles + " texts in cache ");
-                sc = new Scanner(new File(cacheFile));
-                for (int i = 0 ; i < nbFiles ; i++)
+                Scanner sc = new Scanner(new File(cacheIndexFilePath));
+                while (sc.hasNext())
                 {
-                    List<String> key = get1(sc);
-                    InputStruct value = new InputStruct();
-                    value.input = get2(sc);
-                    value.disambiguation = get2(sc);
-                    if (key.size() != value.input.size()) throw new Exception();
-                    if (value.input.size() != value.disambiguation.size()) throw new Exception();
-                    String concat = concatenation(key);
-                    if (verbose) System.err.println("Text " + (i+1) + " key has a length of " + concat.length());
-                    cache.put(concat, value);
+                	String hash = sc.next();
+                	String indexStr = sc.next();
+                	Integer index = Integer.valueOf(indexStr);
+                	ret.put(hash, index);
                 }
                 sc.close();
-            } 
+            }
             catch (FileNotFoundException e) 
             {
-                System.err.println("Warning : WSD cache file not found");
+                System.err.println("Warning : WSD cache index file not found");
             }
             catch (Exception e)
             {
-                System.err.println("Error : Error while parsing WSD cache file");
+                System.err.println("Error : Error while parsing WSD cache index file");
                 e.printStackTrace();
             }
+            return ret;
         }
-        public InputStruct getCacheValue(List<String> textLines)
+
+        private Map<Integer, List<List<String>>> loadCache(Map<String, Integer> index)
+        {
+        	Map<Integer, List<List<String>>> ret = new HashMap<>();
+        	for (Integer key : index.values())
+        	{
+        		List<List<String>> value = loadSingleCache(key);
+	            ret.put(key, value);
+        	}
+        	return ret;
+        }
+
+        private List<List<String>> loadSingleCache(Integer key)
+        {
+    		List<List<String>> ret = new ArrayList<>();
+            try 
+            {
+                Scanner sc = new Scanner(new File(cacheDirPath + "/" + key));
+                while (sc.hasNextLine())
+                {
+                    List<String> words = new ArrayList<>();
+                    for (String word : sc.nextLine().split(" "))
+                    {
+                        words.add(word);
+                    }
+                    ret.add(words);
+                }
+                sc.close();
+            }
+            catch (FileNotFoundException e) 
+            {
+                System.err.println("Warning : WSD cache file " + key + " not found");
+            }
+            catch (Exception e)
+            {
+                System.err.println("Error : Error while parsing WSD cache file " + key);
+                e.printStackTrace();
+            }
+            return ret;
+        }
+        
+        public List<List<String>> getCacheValue(List<String> textLines)
         {
             String concat = concatenation(textLines);
-            for (String key : cache.keySet())
-            {
-            	if (key.length() == concat.length()) return cache.get(key);
-            }
-            return null;
+            String hash = "" + concat.hashCode();
+            if (!index.containsKey(hash)) return null;
+            Integer hashIndex = index.get(hash);
+            if (!cache.containsKey(hashIndex)) return null;
+            return cache.get(hashIndex);
         }
-        public void putCacheValue(List<String> key, InputStruct value)
+        
+        public void putCacheValue(List<String> key, List<List<String>> value)
         {
-            int nbFiles = 0;
+        	String concat = concatenation(key);
+        	String hash = "" + concat.hashCode();
+        	int indexx = index.size();
             try
             {
-                Scanner sc = new Scanner(new File(cacheFileN));
-                nbFiles = sc.nextInt();
-                sc.close();
-            } catch (Exception e) {}
-            try
+            	FileWriter fw = new FileWriter(cacheDirPath + "/" + indexx, false);
+                BufferedWriter bw = new BufferedWriter(fw);
+                PrintWriter out = new PrintWriter(bw);
+                for (List<String> line : value)
+                {
+                	for (String word : line)
+                	{
+                		out.print(word + " ");
+                	}
+                	out.println();
+                }
+                out.close();
+            	
+            	fw = new FileWriter(cacheIndexFilePath, true);
+                bw = new BufferedWriter(fw);
+                out = new PrintWriter(bw);
+                out.println(hash + " " + index.size());
+                out.close();
+                
+                index.put(hash, indexx);
+                cache.put(indexx, value);
+            } 
+            catch (Exception e) 
             {
-                PrintWriter pw = new PrintWriter(new File(cacheFileN));
-                pw.println(nbFiles + 1);
-                pw.close();
-                pw = new PrintWriter(new BufferedWriter(new FileWriter(cacheFile, true)));
-                put1(key, pw);
-                put2(value.input, pw);
-                put2(value.disambiguation, pw);
-                pw.close();
-                cache.put(concatenation(key), value);
-            } catch (Exception e) { throw new RuntimeException(); }
+            	throw new RuntimeException(e);
+            }
+        }
+        
+        private String concatenation(List<String> lines)
+        {
+            String concat = "";
+            for (String line : lines) concat += line;
+            return concat;
         }
     }
     
-    private static DisambiguationCache cache = new DisambiguationCache();
-*/
+    private static DisambiguationCache cache = null;
+
     public static void initWithFullInput(List<String> testLines, List<String> refLines, boolean normalize, boolean lowercase, boolean keepPunctuation)
     {
+    	if (cache == null) cache = new DisambiguationCache();
         if (verbose) System.err.println("Initializing test input");
         test = initInputStructure(testLines, normalize, lowercase, keepPunctuation);
         if (verbose) System.err.println("Initializing reference input");
@@ -190,22 +205,22 @@ public class WSDMatcher
     
     private static InputStruct initInputStructure(List<String> originalLines, boolean normalize, boolean lowercase, boolean keepPunctuation)
     {
-        InputStruct ret = null;//cache.getCacheValue(originalLines);
-        if (ret != null)
-        { 
-        	System.err.println("Input disambiguation found in cache");
-        	return ret;
-        }
-        System.err.println("Input disambiguation not found in cache");
-        ret = new InputStruct();
-        loadStanford();
-        loadDictionary();
-        loadDisambiguator();
+        InputStruct ret = new InputStruct();
         List<String> lines = originalLines;
         if (verbose) System.err.println("Input has " + lines.size() + " lines");
         if (normalize) lines = normalize(lines, keepPunctuation);
         if (lowercase) lines = lowercase(lines);
+        loadStanford();
+        loadDictionary();
+        loadDisambiguator();
         ret.input = tokenize(lines);
+        ret.disambiguation = cache.getCacheValue(lines);
+        if (ret.disambiguation != null)
+        { 
+        	if (verbose) System.err.println("Input disambiguation found in cache");
+        	return ret;
+        }
+        if (verbose) System.err.println("Input disambiguation not found in cache");
         Text text = rawToText(lines);
         if (verbose) System.err.println("Parsed " + text.numberOfSentences() + " sentences");
         if (verbose) System.err.println("Loading senses... ");
@@ -218,7 +233,7 @@ public class WSDMatcher
         ret.disambiguation = alignDisambiguation(text, config, ret.input);
         if (reallyVerbose) System.err.println("Final disambiguation :");
         if (reallyVerbose) printDisambiguation(ret.input, ret.disambiguation, text, config);
-        //cache.putCacheValue(originalLines, ret);
+        cache.putCacheValue(lines, ret.disambiguation);
         return ret;
     }
     
@@ -431,7 +446,7 @@ public class WSDMatcher
         double maxLevyScale = 1.5;
         disambiguator = new MultiThreadCuckooSearch(iterations, minLevyLocation, maxLevyLocation, minLevyScale, maxLevyScale, scorer, false); 
         disambiguator = new LargeDocumentDisambiguator(disambiguator, 300, verbose);
-        disambiguator = new RandomDisambiguator();
+        //disambiguator = new RandomDisambiguator();
         //disambiguator = new SimpleFirstSenseDisambiguator();
     }
 

@@ -16,10 +16,10 @@
  * Contributors:
  *     Richard Eckart de Castilho - initial API and implementation
  ******************************************************************************/
-package org.annolab.tt4j;
+package org.annolab.mytt4j;
 
 import static java.util.Arrays.asList;
-import static org.annolab.tt4j.Util.join;
+import static org.annolab.mytt4j.Util.join;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;

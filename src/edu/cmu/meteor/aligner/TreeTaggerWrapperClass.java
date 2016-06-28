@@ -9,7 +9,7 @@ import java.util.Map;
 
 import static java.util.Arrays.asList;
 
-import org.annolab.tt4j.*;
+import org.annolab.mytt4j.*;
 
 /**
  * 

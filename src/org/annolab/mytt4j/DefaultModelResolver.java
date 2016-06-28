@@ -16,7 +16,7 @@
  * Contributors:
  *     Richard Eckart de Castilho - initial API and implementation
  ******************************************************************************/
-package org.annolab.tt4j;
+package org.annolab.mytt4j;
 
 import java.io.File;
 import java.io.IOException;
@@ -26,7 +26,7 @@ import java.util.List;
 import java.util.Set;
 
 import static java.io.File.separator;
-import static org.annolab.tt4j.Util.*;
+import static org.annolab.mytt4j.Util.*;
 
 /**
  * Simple model provider. The model name is actually the path to the model.

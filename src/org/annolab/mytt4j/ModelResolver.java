@@ -16,17 +16,17 @@
  * Contributors:
  *     Richard Eckart de Castilho - initial API and implementation
  ******************************************************************************/
-package org.annolab.tt4j;
+package org.annolab.mytt4j;
 
 import java.io.IOException;
 
 /**
- * Resolve the location of the TreeTagger executable.
+ * Resolve the location of the TreeTagger model.
  *
  * @author Richard Eckart de Castilho
  */
 public
-interface ExecutableResolver
+interface ModelResolver
 {
 	/**
 	 * Set platform information.
@@ -37,19 +37,13 @@ interface ExecutableResolver
 			PlatformDetector aPlatform);
 
 	/**
-	 * Destroy transient resources for the executable file. E.g. if the file
-	 * was extracted to a temporary location from an archive/classpath, it can
-	 * be deleted by this method.
-	 */
-	void destroy();
-
-	/**
-	 * Get the executable file. If necessary the file can be provided in a
-	 * temporary location by this method.
+	 * Load the model with the given name.
 	 *
-	 * @return the executable file.
-	 * @throws IOException if the file cannot be located/provided.
+	 * @param modelName the name of the model.
+	 * @return the model.
+	 * @throws IOException if the model can not be found.
 	 */
-	String getExecutable()
-	throws IOException ;
+	Model getModel(
+			String modelName)
+	throws IOException;
 }

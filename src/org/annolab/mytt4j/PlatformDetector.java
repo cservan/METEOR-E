@@ -16,7 +16,7 @@
  * Contributors:
  *     Richard Eckart de Castilho - initial API and implementation
  ******************************************************************************/
-package org.annolab.tt4j;
+package org.annolab.mytt4j;
 
 import java.nio.ByteOrder;
 

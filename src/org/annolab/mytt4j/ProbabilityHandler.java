@@ -16,28 +16,26 @@
  * Contributors:
  *     Richard Eckart de Castilho - initial API and implementation
  ******************************************************************************/
-package org.annolab.tt4j;
+package org.annolab.mytt4j;
 
 /**
- * A token handler receives a notification for each tagged token.
- *
+ * A {@link TokenHandler} can implement this interface to get probability information when
+ * {@link TreeTaggerWrapper#setProbabilityThreshold(Double)} is used.
+ * 
  * @author Richard Eckart de Castilho
- *
- * @param <O> the token type.
  */
-public
-interface TokenHandler<O>
+public 
+interface ProbabilityHandler<O> extends TokenHandler<O>
 {
-	/**
-	 * Process a token that TreeTagger has analyzed.
-	 *
-	 * @param token the one of the token objects passed to
-	 *     {@link TreeTaggerWrapper#process(java.util.Collection)}
-	 * @param pos the Part-of-Speech tag as produced by TreeTagger or <code>null</code>.
-	 * @param lemma the lemma as produced by TreeTagger or <code>null</code>.
-	 */
-	void token(
-			O token,
-			String pos,
-			String lemma);
+    /**
+     * Process the probabilities for the last token provided to {@link TokenHandler#token}.
+     *
+     * @param pos the Part-of-Speech tag as produced by TreeTagger or <code>null</code>.
+     * @param lemma the lemma as produced by TreeTagger or <code>null</code>.
+     * @param probability the probability of the tag/lemma.
+     */
+    void probability(
+            String pos,
+            String lemma,
+            double probability);
 }

@@ -12,7 +12,7 @@
  * Contributors:
  *     Peter Franza               - initial implementation
  ******************************************************************************/
-package org.annolab.tt4j;
+package org.annolab.mytt4j;
 
 import java.io.DataInput;
 import java.io.DataInputStream;

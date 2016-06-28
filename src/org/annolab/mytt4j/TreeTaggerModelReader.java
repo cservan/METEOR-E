@@ -16,10 +16,10 @@
  * Contributors:
  *     Richard Eckart de Castilho - initial API and implementation
  ******************************************************************************/
-package org.annolab.tt4j;
+package org.annolab.mytt4j;
 
-import static org.annolab.tt4j.TreeTaggerModel.VERSION_3_1;
-import static org.annolab.tt4j.TreeTaggerModel.VERSION_3_2;
+import static org.annolab.mytt4j.TreeTaggerModel.VERSION_3_1;
+import static org.annolab.mytt4j.TreeTaggerModel.VERSION_3_2;
 
 import java.io.DataInput;
 import java.io.DataInputStream;

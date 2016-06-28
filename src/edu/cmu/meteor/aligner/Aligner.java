@@ -12,6 +12,8 @@ package edu.cmu.meteor.aligner;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.PrintStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -334,6 +336,11 @@ public class Aligner {
 		// Set the stage for matching
 		Stage s = new Stage(a.words1, a.words2);
 		
+        PrintStream out = System.out;
+        PrintStream err = System.err;
+        System.setOut(new PrintStream(new OutputStream(){public void write(int arg0) throws IOException{}}));
+        System.setErr(new PrintStream(new OutputStream(){public void write(int arg0) throws IOException{}}));
+		
 		if (ttWrapperClass != null )
 		{
 			a.POS1=new ArrayList<String>();
@@ -612,6 +619,11 @@ public class Aligner {
 
 		double avgMatches = ((double) (a.line1Matches + a.line2Matches)) / 2;
 		a.avgChunkLength = (a.numChunks > 0) ? avgMatches / a.numChunks : 0;
+		
+		
+		System.setOut(out);
+		System.setErr(err);
+		
 	}
 
 	// Beam search for best alignment

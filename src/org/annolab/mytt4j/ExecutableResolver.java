@@ -16,54 +16,40 @@
  * Contributors:
  *     Richard Eckart de Castilho - initial API and implementation
  ******************************************************************************/
-package org.annolab.tt4j;
+package org.annolab.mytt4j;
+
+import java.io.IOException;
 
 /**
- * Exception throw if an error occurs while tagging is in process.
+ * Resolve the location of the TreeTagger executable.
  *
  * @author Richard Eckart de Castilho
  */
 public
-class TreeTaggerException
-extends Exception
+interface ExecutableResolver
 {
-	private static final long serialVersionUID = -862590343816183238L;
+	/**
+	 * Set platform information.
+	 *
+	 * @param aPlatform the platform information.
+	 */
+	void setPlatformDetector(
+			PlatformDetector aPlatform);
 
 	/**
-	 * New exception.
-	 *
-	 * @param aMessage a message.
+	 * Destroy transient resources for the executable file. E.g. if the file
+	 * was extracted to a temporary location from an archive/classpath, it can
+	 * be deleted by this method.
 	 */
-	public
-	TreeTaggerException(
-			final String aMessage)
-	{
-		super(aMessage);
-	}
+	void destroy();
 
 	/**
-	 * New exception.
+	 * Get the executable file. If necessary the file can be provided in a
+	 * temporary location by this method.
 	 *
-	 * @param aCause a causing exception.
+	 * @return the executable file.
+	 * @throws IOException if the file cannot be located/provided.
 	 */
-	public
-	TreeTaggerException(
-			final Throwable aCause)
-	{
-		super(aCause);
-	}
-
-	/**
-	 * New exception.
-	 *
-	 * @param aMessage a message.
-	 * @param aCause a causing exception.
-	 */
-	public
-	TreeTaggerException(
-			final String aMessage,
-			final Throwable aCause)
-	{
-		super(aMessage, aCause);
-	}
+	String getExecutable()
+	throws IOException ;
 }

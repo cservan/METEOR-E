@@ -16,34 +16,25 @@
  * Contributors:
  *     Richard Eckart de Castilho - initial API and implementation
  ******************************************************************************/
-package org.annolab.tt4j;
-
-import java.io.IOException;
+package org.annolab.mytt4j;
 
 /**
- * Resolve the location of the TreeTagger model.
+ * Adapter to extract a token from the list of objects passed to
+ * {@link TreeTaggerWrapper#process(java.util.Collection)}.
  *
  * @author Richard Eckart de Castilho
+ *
+ * @param <O> the type of object containing the token information.
  */
 public
-interface ModelResolver
+interface TokenAdapter<O>
 {
 	/**
-	 * Set platform information.
+	 * Extract the token string from the given object.
 	 *
-	 * @param aPlatform the platform information.
+	 * @param object and object containing token information.
+	 * @return the token string.
 	 */
-	void setPlatformDetector(
-			PlatformDetector aPlatform);
-
-	/**
-	 * Load the model with the given name.
-	 *
-	 * @param modelName the name of the model.
-	 * @return the model.
-	 * @throws IOException if the model can not be found.
-	 */
-	Model getModel(
-			String modelName)
-	throws IOException;
+	String getText(
+			O object);
 }

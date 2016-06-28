@@ -16,25 +16,54 @@
  * Contributors:
  *     Richard Eckart de Castilho - initial API and implementation
  ******************************************************************************/
-package org.annolab.tt4j;
+package org.annolab.mytt4j;
 
 /**
- * Adapter to extract a token from the list of objects passed to
- * {@link TreeTaggerWrapper#process(java.util.Collection)}.
+ * Exception throw if an error occurs while tagging is in process.
  *
  * @author Richard Eckart de Castilho
- *
- * @param <O> the type of object containing the token information.
  */
 public
-interface TokenAdapter<O>
+class TreeTaggerException
+extends Exception
 {
+	private static final long serialVersionUID = -862590343816183238L;
+
 	/**
-	 * Extract the token string from the given object.
+	 * New exception.
 	 *
-	 * @param object and object containing token information.
-	 * @return the token string.
+	 * @param aMessage a message.
 	 */
-	String getText(
-			O object);
+	public
+	TreeTaggerException(
+			final String aMessage)
+	{
+		super(aMessage);
+	}
+
+	/**
+	 * New exception.
+	 *
+	 * @param aCause a causing exception.
+	 */
+	public
+	TreeTaggerException(
+			final Throwable aCause)
+	{
+		super(aCause);
+	}
+
+	/**
+	 * New exception.
+	 *
+	 * @param aMessage a message.
+	 * @param aCause a causing exception.
+	 */
+	public
+	TreeTaggerException(
+			final String aMessage,
+			final Throwable aCause)
+	{
+		super(aMessage, aCause);
+	}
 }

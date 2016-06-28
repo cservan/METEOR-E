@@ -171,6 +171,8 @@ public class Matcher {
 					moduleWeights.add(0.5);
 				else if (module == Constants.MODULE_EMBEDDINGS)
 					moduleWeights.add(0.5);
+				else if (module == Constants.MODULE_WSD)
+					moduleWeights.add(0.5);
 				else
 					moduleWeights.add(0.5);
 			}
@@ -185,6 +187,8 @@ public class Matcher {
 				else if (module == Constants.MODULE_SYNONYM)
 					moduleWeights.add(1.0);
 				else if (module == Constants.MODULE_EMBEDDINGS)
+					moduleWeights.add(1.0);
+				else if (module == Constants.MODULE_WSD)
 					moduleWeights.add(1.0);
 				else
 					moduleWeights.add(0.0);

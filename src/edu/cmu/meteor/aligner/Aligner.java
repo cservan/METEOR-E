@@ -227,6 +227,8 @@ public class Aligner {
 			} else if (module == Constants.MODULE_PARAPHRASE) {
 				this.moduleWeights.add(Constants.DEFAULT_WEIGHT_PARAPHRASE);
 				this.paraphrase = new ParaphraseTransducer(paraDirURL);
+			} else if (module == Constants.MODULE_WSD) {
+				this.moduleWeights.add(Constants.DEFAULT_WEIGHT_WSD);
 			}
 		}
 		this.functionWords = new HashSet<String>();
@@ -293,6 +295,8 @@ public class Aligner {
 				{
 				    System.err.println("Aligner: Error Embeddings are null");
 				}
+			} else if (module == Constants.MODULE_WSD) {
+				this.moduleWeights.add(Constants.DEFAULT_WEIGHT_WSD);
 			}
 		}
 		this.functionWords = new HashSet<String>();
@@ -428,10 +432,12 @@ public class Aligner {
 		// Special case: if sentences are identical, only exact matches are
 		// needed. This prevents beam search errors.
 		int modsUsed = moduleCount;
+		/* sauf que ça fait de la merde avec le WSD ^^
 		if (a.words1.size() == a.words2.size()
 				&& Arrays.equals(s.words1, s.words2)) {
 			modsUsed = 1;
 		}
+		*/
 		
 
 		// For each module
@@ -456,6 +462,8 @@ public class Aligner {
 			} else if (matcher == Constants.MODULE_EMBEDDINGS) {
 				// Embeddings need the embeddings file
 				EmbeddingsMatcher.match(modNum, a, s, distance, embeddingsThreshold, embeddingsType);
+			} else if (matcher == Constants.MODULE_WSD) {
+				WSDMatcher.match(modNum, a, s);
 			} else {
 				throw new RuntimeException("Matcher not recognized: " + matcher);
 			}

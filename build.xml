@@ -11,7 +11,11 @@
   </target>
 
   <target name="compile" depends="init">
-    <javac srcdir="src" destdir="build" encoding="UTF-8" debug="true"/>
+    <javac srcdir="src" destdir="build" encoding="UTF-8" debug="true">
+        <classpath>
+            <pathelement path="lib/lexsema-wsd-core.jar"/>
+        </classpath>
+    </javac>
   </target>
 
   <target name="dist" depends="compile">

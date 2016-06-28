@@ -30,9 +30,9 @@ public class MeteorScorer {
 	private String language;
 	private int langID;
 
-	private boolean normalize;
-	private boolean keepPunctuation;
-	private boolean lowerCase;
+	public boolean normalize;
+	public boolean keepPunctuation;
+	public boolean lowerCase;
 
 	// Parameters
 	private double alpha;

@@ -67,8 +67,9 @@ public class Constants {
 	public static final int MODULE_SYNONYM = 2;
 	public static final int MODULE_PARAPHRASE = 3;
 	public static final int MODULE_EMBEDDINGS = 4;
+	public static final int MODULE_WSD = 5;
 
-	public static final int MAX_MODULES = 5;
+	public static final int MAX_MODULES = 6;
 
 	public static final double DEFAULT_WEIGHT_EXACT = 1.0;
 	public static final double DEFAULT_WEIGHT_STEM = 1.0;
@@ -76,6 +77,7 @@ public class Constants {
 	public static final double DEFAULT_WEIGHT_PARAPHRASE = 1.0;
 	public static final double DEFAULT_WEIGHT_EMBEDDINGS = 1.0;
 	public static final double DEFAULT_THRESHOLD_EMBEDDINGS = 0.4;
+	public static final double DEFAULT_WEIGHT_WSD = 1.0;
 
 	public static final int DEFAULT_BEAM_SIZE = 40;
 
@@ -163,23 +165,23 @@ public class Constants {
 	};
 	public static final double WEIGHT_ADQ[][] = {
 			//
-			{ 1.0, 1.0, 0.6, 0.8, 0.8 }, // English
-			{ 0.0, 0.0, 0.0, 0.0, 0.0 }, // Czech
-			{ 0.0, 0.0, 0.0, 0.0, 0.0 }, // French
-			{ 0.0, 0.0, 0.0, 0.0, 0.0 }, // Spanish
-			{ 0.0, 0.0, 0.0, 0.0, 0.0 }, // German
-			{ 0.0, 0.0, 0.0, 0.0, 0.0 }, // Arabic Buckwalter Reduced
-			{ 0.0, 0.0, 0.0, 0.0, 0.0 }, // Portuguese
-			{ 0.0, 0.0, 0.0, 0.0, 0.0 }, // Russian
-			{ 0.0, 0.0, 0.0, 0.0, 0.0 }, // Danish
-			{ 0.0, 0.0, 0.0, 0.0, 0.0 }, // Romanian
-			{ 0.0, 0.0, 0.0, 0.0, 0.0 }, // Hungarian
-			{ 0.0, 0.0, 0.0, 0.0, 0.0 }, // Turkish
-			{ 0.0, 0.0, 0.0, 0.0, 0.0 }, // Finnish
-			{ 0.0, 0.0, 0.0, 0.0, 0.0 }, // Dutch
-			{ 0.0, 0.0, 0.0, 0.0, 0.0 }, // Italian
-			{ 0.0, 0.0, 0.0, 0.0, 0.0 }, // Norwegian
-			{ 0.0, 0.0, 0.0, 0.0, 0.0 }, // Swedish
+			{ 1.0, 1.0, 0.6, 0.8, 0.8, 0.0}, // English
+			{ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0}, // Czech
+			{ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0}, // French
+			{ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0}, // Spanish
+			{ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0}, // German
+			{ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0}, // Arabic Buckwalter Reduced
+			{ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0}, // Portuguese
+			{ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0}, // Russian
+			{ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0}, // Danish
+			{ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0}, // Romanian
+			{ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0}, // Hungarian
+			{ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0}, // Turkish
+			{ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0}, // Finnish
+			{ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0}, // Dutch
+			{ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0}, // Italian
+			{ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0}, // Norwegian
+			{ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0}, // Swedish
 	};
 
 	/* Ranking task */
@@ -206,23 +208,23 @@ public class Constants {
 	};
 	public static final double WEIGHT_RANK[][] = {
 			//
-			{ 1.0, 0.6, 0.8, 0.6, 0.8 }, // English
-			{ 1.0, 0.4, 0.0, 0.0, 0.0 }, // Czech
-			{ 1.0, 0.2, 0.8, 0.4, 0.8 }, // French
-			{ 1.0, 0.8, 0.8, 0.6, 0.8 }, // Spanish
-			{ 1.0, 0.8, 0.8, 0.2, 0.8 }, // German
-			{ 0.0, 0.0, 0.0, 0.0, 0.0 }, // Arabic Buckwalter Reduced
-			{ 0.0, 0.0, 0.0, 0.0, 0.0 }, // Portuguese
-			{ 1.0, 0.5, 0.8, 0.5, 0.8 }, // Russian, copy of LI
-			{ 0.0, 0.0, 0.0, 0.0, 0.0 }, // Danish
-			{ 0.0, 0.0, 0.0, 0.0, 0.0 }, // Romanian
-			{ 0.0, 0.0, 0.0, 0.0, 0.0 }, // Hungarian
-			{ 0.0, 0.0, 0.0, 0.0, 0.0 }, // Turkish
-			{ 0.0, 0.0, 0.0, 0.0, 0.0 }, // Finnish
-			{ 0.0, 0.0, 0.0, 0.0, 0.0 }, // Dutch
-			{ 0.0, 0.0, 0.0, 0.0, 0.0 }, // Italian
-			{ 0.0, 0.0, 0.0, 0.0, 0.0 }, // Norwegian
-			{ 0.0, 0.0, 0.0, 0.0, 0.0 }, // Swedish
+			{ 1.0, 0.6, 0.8, 0.6, 0.8, 0.0}, // English
+			{ 1.0, 0.4, 0.0, 0.0, 0.0, 0.0}, // Czech
+			{ 1.0, 0.2, 0.8, 0.4, 0.8, 0.0}, // French
+			{ 1.0, 0.8, 0.8, 0.6, 0.8, 0.0}, // Spanish
+			{ 1.0, 0.8, 0.8, 0.2, 0.8, 0.0}, // German
+			{ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0}, // Arabic Buckwalter Reduced
+			{ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0}, // Portuguese
+			{ 1.0, 0.5, 0.8, 0.5, 0.8, 0.0}, // Russian, copy of LI
+			{ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0}, // Danish
+			{ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0}, // Romanian
+			{ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0}, // Hungarian
+			{ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0}, // Turkish
+			{ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0}, // Finnish
+			{ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0}, // Dutch
+			{ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0}, // Italian
+			{ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0}, // Norwegian
+			{ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0}, // Swedish
 	};
 	/*
 	public static final double PARAM_RANK[][] = {
@@ -263,39 +265,39 @@ public class Constants {
 };
 public static final double WEIGHT_RANK[][] = {
 		//
-		{ 1.0, 0.6, 0.8, 0.6, 0.0 }, // English
-		{ 1.0, 0.6, 0.8, 0.6, 0.0 }, // Czech
-		{ 1.0, 0.6, 0.8, 0.6, 0.0 }, // French
-		{ 1.0, 0.6, 0.8, 0.6, 0.0 }, // Spanish
-		{ 1.0, 0.6, 0.8, 0.6, 0.0 }, // German
-		{ 1.0, 0.6, 0.8, 0.6, 0.0 }, // Arabic Buckwalter Reduced
-		{ 1.0, 0.6, 0.8, 0.6, 0.0 }, // Portuguese
-		{ 1.0, 0.6, 0.8, 0.6, 0.0 }, // Russian, copy of LI
-		{ 1.0, 0.6, 0.8, 0.6, 0.0 }, // Danish
-		{ 1.0, 0.6, 0.8, 0.6, 0.0 }, // Romanian
-		{ 1.0, 0.6, 0.8, 0.6, 0.0 }, // Hungarian
-		{ 1.0, 0.6, 0.8, 0.6, 0.0 }, // Turkish
-		{ 1.0, 0.6, 0.8, 0.6, 0.0 }, // Finnish
-		{ 1.0, 0.6, 0.8, 0.6, 0.0 }, // Dutch
-		{ 1.0, 0.6, 0.8, 0.6, 0.0 }, // Italian
-		{ 1.0, 0.6, 0.8, 0.6, 0.0 }, // Norwegian
-		{ 1.0, 0.6, 0.8, 0.6, 0.0 }, // Swedish
-			{ 1.0, 0.4, 0.0, 0.0, 0.0 }, // Czech
-		{ 1.0, 0.2, 0.4, 0.8, 0.0 }, // French
-		{ 1.0, 0.8, 0.6, 0.8, 0.0 }, // Spanish
-		{ 1.0, 0.8, 0.2, 0.8, 0.0 }, // German
-		{ 0.0, 0.0, 0.0, 0.0, 0.0 }, // Arabic Buckwalter Reduced
-		{ 0.0, 0.0, 0.0, 0.0, 0.0 }, // Portuguese
-		{ 1.0, 0.5, 0.5, 0.8, 0.0 }, // Russian, copy of LI
-		{ 0.0, 0.0, 0.0, 0.0, 0.0 }, // Danish
-		{ 0.0, 0.0, 0.0, 0.0, 0.0 }, // Romanian
-		{ 0.0, 0.0, 0.0, 0.0, 0.0 }, // Hungarian
-		{ 0.0, 0.0, 0.0, 0.0, 0.0 }, // Turkish
-		{ 0.0, 0.0, 0.0, 0.0, 0.0 }, // Finnish
-		{ 0.0, 0.0, 0.0, 0.0, 0.0 }, // Dutch
-		{ 0.0, 0.0, 0.0, 0.0, 0.0 }, // Italian
-		{ 0.0, 0.0, 0.0, 0.0, 0.0 }, // Norwegian
-		{ 0.0, 0.0, 0.0, 0.0, 0.0 }, // Swedish 
+		{ 1.0, 0.6, 0.8, 0.6, 0.0, 0.0 }, // English
+		{ 1.0, 0.6, 0.8, 0.6, 0.0, 0.0}, // Czech
+		{ 1.0, 0.6, 0.8, 0.6, 0.0, 0.0}, // French
+		{ 1.0, 0.6, 0.8, 0.6, 0.0, 0.0}, // Spanish
+		{ 1.0, 0.6, 0.8, 0.6, 0.0, 0.0}, // German
+		{ 1.0, 0.6, 0.8, 0.6, 0.0, 0.0}, // Arabic Buckwalter Reduced
+		{ 1.0, 0.6, 0.8, 0.6, 0.0, 0.0}, // Portuguese
+		{ 1.0, 0.6, 0.8, 0.6, 0.0, 0.0}, // Russian, copy of LI
+		{ 1.0, 0.6, 0.8, 0.6, 0.0, 0.0}, // Danish
+		{ 1.0, 0.6, 0.8, 0.6, 0.0, 0.0}, // Romanian
+		{ 1.0, 0.6, 0.8, 0.6, 0.0, 0.0}, // Hungarian
+		{ 1.0, 0.6, 0.8, 0.6, 0.0, 0.0}, // Turkish
+		{ 1.0, 0.6, 0.8, 0.6, 0.0, 0.0}, // Finnish
+		{ 1.0, 0.6, 0.8, 0.6, 0.0, 0.0}, // Dutch
+		{ 1.0, 0.6, 0.8, 0.6, 0.0, 0.0}, // Italian
+		{ 1.0, 0.6, 0.8, 0.6, 0.0, 0.0}, // Norwegian
+		{ 1.0, 0.6, 0.8, 0.6, 0.0, 0.0}, // Swedish
+			{ 1.0, 0.4, 0.0, 0.0, 0.0, 0.0}, // Czech
+		{ 1.0, 0.2, 0.4, 0.8, 0.0, 0.0}, // French
+		{ 1.0, 0.8, 0.6, 0.8, 0.0, 0.0}, // Spanish
+		{ 1.0, 0.8, 0.2, 0.8, 0.0, 0.0}, // German
+		{ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0}, // Arabic Buckwalter Reduced
+		{ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0}, // Portuguese
+		{ 1.0, 0.5, 0.5, 0.8, 0.0, 0.0}, // Russian, copy of LI
+		{ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0}, // Danish
+		{ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0}, // Romanian
+		{ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0}, // Hungarian
+		{ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0}, // Turkish
+		{ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0}, // Finnish
+		{ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0}, // Dutch
+		{ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0}, // Italian
+		{ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0}, // Norwegian
+		{ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0}, // Swedish 
 };*/
 	/* HTER task */
 	public static final int TASK_HTER = 2;
@@ -321,23 +323,23 @@ public static final double WEIGHT_RANK[][] = {
 	};
 	public static final double WEIGHT_HTER[][] = {
 			//
-			{ 1.0, 0.2, 0.6, 0.8, 0.0 }, // English
-			{ 0.0, 0.0, 0.0, 0.0, 0.0 }, // Czech
-			{ 0.0, 0.0, 0.0, 0.0, 0.0 }, // French
-			{ 0.0, 0.0, 0.0, 0.0, 0.0 }, // Spanish
-			{ 0.0, 0.0, 0.0, 0.0, 0.0 }, // German
-			{ 0.0, 0.0, 0.0, 0.0, 0.0 }, // Arabic Buckwalter Reduced
-			{ 0.0, 0.0, 0.0, 0.0, 0.0 }, // Portuguese
-			{ 0.0, 0.0, 0.0, 0.0, 0.0 }, // Russian
-			{ 0.0, 0.0, 0.0, 0.0, 0.0 }, // Danish
-			{ 0.0, 0.0, 0.0, 0.0, 0.0 }, // Romanian
-			{ 0.0, 0.0, 0.0, 0.0, 0.0 }, // Hungarian
-			{ 0.0, 0.0, 0.0, 0.0, 0.0 }, // Turkish
-			{ 0.0, 0.0, 0.0, 0.0, 0.0 }, // Finnish
-			{ 0.0, 0.0, 0.0, 0.0, 0.0 }, // Dutch
-			{ 0.0, 0.0, 0.0, 0.0, 0.0 }, // Italian
-			{ 0.0, 0.0, 0.0, 0.0, 0.0 }, // Norwegian
-			{ 0.0, 0.0, 0.0, 0.0, 0.0 }, // Swedish
+			{ 1.0, 0.2, 0.6, 0.8, 0.0, 0.0}, // English
+			{ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0}, // Czech
+			{ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0}, // French
+			{ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0}, // Spanish
+			{ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0}, // German
+			{ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0}, // Arabic Buckwalter Reduced
+			{ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0}, // Portuguese
+			{ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0}, // Russian
+			{ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0}, // Danish
+			{ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0}, // Romanian
+			{ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0}, // Hungarian
+			{ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0}, // Turkish
+			{ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0}, // Finnish
+			{ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0}, // Dutch
+			{ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0}, // Italian
+			{ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0}, // Norwegian
+			{ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0}, // Swedish
 	};
 
 	/* Utility task */
@@ -364,23 +366,23 @@ public static final double WEIGHT_RANK[][] = {
 	};
 	public static final double WEIGHT_UTIL[][] = {
 			//
-			{ 1.0, 0.0, 0.0, 0.8, 0.0 }, // English
-			{ 0.0, 0.0, 0.0, 0.0, 0.0 }, // Czech
-			{ 0.0, 0.0, 0.0, 0.0, 0.0 }, // French
-			{ 0.0, 0.0, 0.0, 0.0, 0.0 }, // Spanish
-			{ 0.0, 0.0, 0.0, 0.0, 0.0 }, // German
-			{ 0.0, 0.0, 0.0, 0.0, 0.0 }, // Arabic Buckwalter Reduced
-			{ 0.0, 0.0, 0.0, 0.0, 0.0 }, // Portuguese
-			{ 0.0, 0.0, 0.0, 0.0, 0.0 }, // Russian
-			{ 0.0, 0.0, 0.0, 0.0, 0.0 }, // Danish
-			{ 0.0, 0.0, 0.0, 0.0, 0.0 }, // Romanian
-			{ 0.0, 0.0, 0.0, 0.0, 0.0 }, // Hungarian
-			{ 0.0, 0.0, 0.0, 0.0, 0.0 }, // Turkish
-			{ 0.0, 0.0, 0.0, 0.0, 0.0 }, // Finnish
-			{ 0.0, 0.0, 0.0, 0.0, 0.0 }, // Dutch
-			{ 0.0, 0.0, 0.0, 0.0, 0.0 }, // Italian
-			{ 0.0, 0.0, 0.0, 0.0, 0.0 }, // Norwegian
-			{ 0.0, 0.0, 0.0, 0.0, 0.0 }, // Swedish
+			{ 1.0, 0.0, 0.0, 0.8, 0.0, 0.0}, // English
+			{ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0}, // Czech
+			{ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0}, // French
+			{ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0}, // Spanish
+			{ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0}, // German
+			{ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0}, // Arabic Buckwalter Reduced
+			{ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0}, // Portuguese
+			{ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0}, // Russian
+			{ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0}, // Danish
+			{ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0}, // Romanian
+			{ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0}, // Hungarian
+			{ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0}, // Turkish
+			{ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0}, // Finnish
+			{ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0}, // Dutch
+			{ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0}, // Italian
+			{ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0}, // Norwegian
+			{ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0}, // Swedish
 	};
 
 	public static final int TASK_DEFAULT = TASK_RANK;
@@ -391,17 +393,17 @@ public static final double WEIGHT_RANK[][] = {
 	// data exists
 	public static final double PARAM_I[] = { 0.75, 1.40, 0.70, 0.50, 0.0 };
 	// Non-exact matches all get half credit
-	public static final double WEIGHT_I[] = { 1.0, 0.5, 0.5, 0.5, 0.0 };
+	public static final double WEIGHT_I[] = { 1.0, 0.5, 0.5, 0.5, 0.0, 0.0 };
 
 	/* Tuning task */
 	public static final int TASK_TUNE = 100;
 	public static final double PARAM_TUNE[] = { 0.5, 1.0, 0.5, 0.5, 0.0 };
-	public static final double WEIGHT_TUNE[] = { 1.0, 0.5, 0.5, 0.5, 0.0 };
+	public static final double WEIGHT_TUNE[] = { 1.0, 0.5, 0.5, 0.5, 0.0, 0.0 };
 
 	/* Universal task */
 	public static final int TASK_UNIVERSAL = 101;
 	public static final double PARAM_U[] = { 0.70, 1.40, 0.30, 0.70, 0.0 };
-	public static final double WEIGHT_U[] = { 1.0, 0.6, 0, 0, 0.0 };
+	public static final double WEIGHT_U[] = { 1.0, 0.6, 0, 0, 0.0, 0.0 };
 
 	// Cannot be used to set task, only used when options are specified manually
 	public static final int TASK_CUSTOM = -1;
@@ -646,6 +648,8 @@ public static final double WEIGHT_RANK[][] = {
 			return MODULE_PARAPHRASE;
 		if (mod.equals("embeddings"))
 			return MODULE_EMBEDDINGS;
+		if (mod.equals("wsd"))
+			return MODULE_WSD;
 		// Not found
 		throw new RuntimeException("Unknown module (" + modName + ")");
 	}
@@ -661,6 +665,8 @@ public static final double WEIGHT_RANK[][] = {
 			return "paraphrase";
 		if (module == MODULE_EMBEDDINGS)
 			return "embeddings";
+		if (module == MODULE_WSD)
+			return "wsd";
 		// Not found
 		throw new RuntimeException("Unknown module ID (" + module + ")");
 	}
@@ -676,6 +682,8 @@ public static final double WEIGHT_RANK[][] = {
 			return "pa";
 		if (module == MODULE_EMBEDDINGS)
 			return "we";
+		if (module == MODULE_WSD)
+			return "ws";
 		// Not found
 		throw new RuntimeException("Unknown module ID (" + module + ")");
 	}
@@ -900,6 +908,7 @@ public static final double WEIGHT_RANK[][] = {
 			modules.add(MODULE_SYNONYM);
 			modules.add(MODULE_PARAPHRASE);
 						modules.add(MODULE_EMBEDDINGS);
+						modules.add(MODULE_WSD);
 		} else if (langID == LANG_FR) {
 			modules.add(MODULE_EXACT);
 			modules.add(MODULE_STEM);

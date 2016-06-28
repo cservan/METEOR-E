@@ -22,6 +22,7 @@ import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Properties;
 
+import edu.cmu.meteor.aligner.WSDMatcher;
 import edu.cmu.meteor.scorer.MeteorConfiguration;
 import edu.cmu.meteor.scorer.MeteorScorer;
 import edu.cmu.meteor.scorer.MeteorStats;
@@ -162,6 +163,18 @@ public class Meteor {
 			return;
 		}
 
+		if (config.getModules().contains(Constants.MODULE_WSD))
+		{
+			if (refCount == 1 && config.getLangID() == Constants.LANG_EN)
+			{
+				WSDMatcher.initWithFullInput(lines1, lines2, scorer.normalize, scorer.lowerCase, scorer.keepPunctuation);
+			}
+			else
+			{
+				System.err.println("Warning : WSD Matcher does not implement neither multiple references nor language different than english yet.");
+			}
+		}
+		
 		MeteorStats aggStats = new MeteorStats();
 
 		// Write alignments?

@@ -81,7 +81,7 @@ public class Lib_distance
 		  FileInputStream inputBinaryFile = new FileInputStream (filename);	  // Fichier binaire    
 		  DataInputStream inputBinaryData = new DataInputStream (inputBinaryFile);    // Le même fichier via stream
 
-		  System.out.println();
+		  System.err.println();
 		  String infos = inputBinaryData.readLine().toString();
 		  String[] vInfos = infos.split(" ");
 		  vocab_size = Integer.parseInt(vInfos[0]);
@@ -93,10 +93,10 @@ public class Lib_distance
 		  int wordCount=0;
 		  myHashMap = new HashMap<String, Integer>(vocab_hash_size);
 		  myReverseHashMap = new HashMap<Integer, String>(vocab_hash_size);
-		  System.out.print("Vocabulary size: ");
-		  System.out.println(vocab_size);
-		  System.out.print("Vector size: ");
-		  System.out.println(vector_size);
+		  System.err.print("Vocabulary size: ");
+		  System.err.println(vocab_size);
+		  System.err.print("Vector size: ");
+		  System.err.println(vector_size);
 		  embeddings = new float[(int)vocab_size][(int)vector_size];
 		  int colCount=0;
 		  while (wordCount<vocab_size)
@@ -135,10 +135,10 @@ public class Lib_distance
 			  }
 			  inputBinaryData.read();
 			  wordCount++;
-			  if (wordCount % (vocab_size/100) == 0) System.out.print(".");
-		  if (wordCount % (vocab_size/10) == 0) System.out.print("|");
+			  if (wordCount % (vocab_size/100) == 0) System.err.print(".");
+		  if (wordCount % (vocab_size/10) == 0) System.err.print("|");
 		  }
-		  System.out.println();
+		  System.err.println();
 	  }
 	// Read Text file with the concern encodage
 	public Lib_distance(URL filename, String encodage) throws IOException
@@ -147,7 +147,7 @@ public class Lib_distance
 		  BufferedReader modelReader = new BufferedReader(new InputStreamReader(new FileInputStream(modelFile), encodage));
 		
 
-		  System.out.println();
+		  System.err.println();
 		  
 		  String infos = modelReader.readLine();
 		  String[] vInfos = infos.split(" ");
@@ -160,10 +160,10 @@ public class Lib_distance
 		  int wordCount=0;
 		  myHashMap = new HashMap<String, Integer>(vocab_hash_size);
 		  myReverseHashMap = new HashMap<Integer, String>(vocab_hash_size);
-		  System.out.print("Vocabulary size: ");
-		  System.out.println(vocab_size);
-		  System.out.print("Vector size: ");
-		  System.out.println(vector_size);
+		  System.err.print("Vocabulary size: ");
+		  System.err.println(vocab_size);
+		  System.err.print("Vector size: ");
+		  System.err.println(vector_size);
 		  embeddings = new float[(int)vocab_size][(int)vector_size];
 		  int colCount=0;
 		  while ((infos = modelReader.readLine()) != null)
@@ -190,11 +190,11 @@ public class Lib_distance
 				  colCount++;
 			  }
 			  wordCount++;
-			  if (wordCount % (vocab_size/100) == 0) System.out.print(".");
-		  if (wordCount % (vocab_size/10) == 0) System.out.print("|");
+			  if (wordCount % (vocab_size/100) == 0) System.err.print(".");
+		  if (wordCount % (vocab_size/10) == 0) System.err.print("|");
 		  }
 		  modelReader.close();
-		  System.out.println();
+		  System.err.println();
 	  }
 	public float[] getVector(String word)
 	{

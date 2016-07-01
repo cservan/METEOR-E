@@ -332,7 +332,7 @@ public class MeteorConfiguration {
 		// Parameters
 		String parameters = props.getProperty("parameters");
 		if (parameters != null) {
-			System.err.println("PARAMETERS: "+parameters);
+			//System.err.println("PARAMETERS: "+parameters);
 			ArrayList<Double> params = new ArrayList<Double>();
 			StringTokenizer p = new StringTokenizer(parameters);
 			while (p.hasMoreTokens())

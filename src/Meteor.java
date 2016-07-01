@@ -52,9 +52,10 @@ public class Meteor {
 		Boolean sgml = Boolean.parseBoolean(props.getProperty("sgml"));
 		Boolean stdio = Boolean.parseBoolean(props.getProperty("stdio"));
 		Boolean quiet = Boolean.parseBoolean(props.getProperty("quiet"));
+		Boolean generateCache = Boolean.parseBoolean(props.getProperty("generate-cache"));
 
 		String format = sgml ? "SGML" : "plaintext";
-		if (!ssOut && !stdio && !quiet) {
+		if (!ssOut && !stdio && !quiet && !generateCache) {
 			System.out.println("Meteor version: " + Constants.VERSION);
 			System.out.println();
 			System.out.println("Eval ID:        " + config.getConfigID());
@@ -192,6 +193,7 @@ public class Meteor {
 		Boolean ssOut = Boolean.parseBoolean(props.getProperty("ssOut"));
 		Boolean vOut = Boolean.parseBoolean(props.getProperty("vOut"));
 		Boolean quiet = Boolean.parseBoolean(props.getProperty("quiet"));
+		Boolean generateCache = Boolean.parseBoolean(props.getProperty("generate-cache"));
 
 		for (int i = 0; i < lines1.size(); i++) {
 			MeteorStats stats;
@@ -207,7 +209,7 @@ public class Meteor {
 						+ stats.fragPenalty + "\t" + stats.score);
 			} else if (quiet) {
 				System.err.println(stats.score);
-			} else {
+			} else if (!generateCache) {
 				System.out.println("Segment " + (i + 1) + " score:\t"
 						+ stats.score);
 			}
@@ -221,6 +223,11 @@ public class Meteor {
 
 		if (writeAlignments) {
 			out.close();
+		}
+		
+		if (generateCache) {
+			System.out.println(aggStats.toString());
+			return;
 		}
 
 		if (!ssOut) {
@@ -790,6 +797,9 @@ public class Meteor {
 				curArg += 1;
 			} else if (args[curArg].equals("-vOut")) {
 				props.setProperty("vOut", "true");
+				curArg += 1;
+			} else if (args[curArg].equals("-generate-cache")) {
+				props.setProperty("generate-cache", "true");
 				curArg += 1;
 			} else {
 				System.err.println("Unknown option \"" + args[curArg] + "\"");

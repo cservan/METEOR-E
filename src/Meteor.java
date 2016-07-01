@@ -53,7 +53,17 @@ public class Meteor {
 		Boolean stdio = Boolean.parseBoolean(props.getProperty("stdio"));
 		Boolean quiet = Boolean.parseBoolean(props.getProperty("quiet"));
 		Boolean generateCache = Boolean.parseBoolean(props.getProperty("generate-cache"));
+		Boolean fromCache = Boolean.parseBoolean(props.getProperty("from-cache"));
 
+		if (fromCache)
+		{
+			MeteorScorer scorer = new MeteorScorer(config);
+			MeteorStats aggStats = new MeteorStats(props.getProperty("cache"));
+			scorer.computeMetrics(aggStats);
+			printVerboseStats(aggStats, config);
+			return;
+		}
+		
 		String format = sgml ? "SGML" : "plaintext";
 		if (!ssOut && !stdio && !quiet && !generateCache) {
 			System.out.println("Meteor version: " + Constants.VERSION);
@@ -801,6 +811,12 @@ public class Meteor {
 			} else if (args[curArg].equals("-generate-cache")) {
 				props.setProperty("generate-cache", "true");
 				curArg += 1;
+			} else if (args[curArg].equals("-from-cache")) {
+				props.setProperty("from-cache", "true");
+				curArg += 1;
+			} else if (args[curArg].equals("-cache")) {
+				props.setProperty("cache", args[curArg + 1]);
+				curArg += 2;
 			} else {
 				System.err.println("Unknown option \"" + args[curArg] + "\"");
 				System.exit(1);

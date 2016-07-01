@@ -117,12 +117,8 @@ public class WSDMatcher
                 Scanner sc = new Scanner(new File(cacheDirPath + "/" + key));
                 while (sc.hasNextLine())
                 {
-                    List<String> words = new ArrayList<>();
-                    for (String word : sc.nextLine().split(" "))
-                    {
-                        words.add(word);
-                    }
-                    ret.add(words);
+                    String line = sc.nextLine();
+                    ret.add(Arrays.asList(line.split(" ")));
                 }
                 sc.close();
             }

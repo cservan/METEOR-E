@@ -461,8 +461,12 @@ public class Aligner {
 				// Stem also need the stemmer
 				StemMatcher.match(modNum, a, s, stemmer);
 			} else if (matcher == Constants.MODULE_SYNONYM) {
+//				System.setOut(out);
+//				System.setErr(err);
 				// Synonym also need the synonym dictionary
 				SynonymMatcher.match(this.language, modNum, a, s, synonyms);
+//		        System.setOut(new PrintStream(new OutputStream(){public void write(int arg0) throws IOException{}}));
+//		        System.setErr(new PrintStream(new OutputStream(){public void write(int arg0) throws IOException{}}));
 			} else if (matcher == Constants.MODULE_PARAPHRASE) {
 				// Paraphrase also need the paraphrase dictionary
 				ParaphraseMatcher.match(modNum, a, s, paraphrase);
@@ -470,7 +474,11 @@ public class Aligner {
 				// Embeddings need the embeddings file
 				EmbeddingsMatcher.match(modNum, a, s, distance, embeddingsThreshold, embeddingsType);
 			} else if (matcher == Constants.MODULE_WSD) {
+//				System.setOut(out);
+//				System.setErr(err);
 				WSDMatcher.match(modNum, a, s);
+//		        System.setOut(new PrintStream(new OutputStream(){public void write(int arg0) throws IOException{}}));
+//		        System.setErr(new PrintStream(new OutputStream(){public void write(int arg0) throws IOException{}}));
 			} else {
 				throw new RuntimeException("Matcher not recognized: " + matcher);
 			}

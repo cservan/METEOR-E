@@ -1,6 +1,6 @@
 #/usr/bin/env bash
 
-if [ $# -lt 2 ]; then
+if [ $# -lt 1 ]; then
     echo "Usage: $0 <modules>"
     echo "Modules are: exact stem wsd synonym paraphrase embeddings"
     exit 1

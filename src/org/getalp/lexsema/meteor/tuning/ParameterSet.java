@@ -11,9 +11,12 @@ public class ParameterSet implements CuckooNest
 
 	private int[] parameters;
 	
+	private ParameterSetScorer scorer;
+	
 	public ParameterSet(int[] parameters)
 	{
 		this.parameters = parameters.clone();
+		this.scorer = new ParameterSetScorer("cache.txt");
 	}
 	
 	@Override
@@ -46,7 +49,7 @@ public class ParameterSet implements CuckooNest
 	@Override
 	public double score()
 	{
-		return ParameterSetScorer.score(this);
+		return scorer.score(this);
 	}
 	
 	@Override

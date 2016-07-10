@@ -13,6 +13,7 @@ public class Trainer2
 		CuckooSearch cuckoo = new CuckooSearch(iterations, minLevyLocation, maxLevyLocation, minLevyScale, maxLevyScale);
 		
 		ParameterSet init = new ParameterSet(new int[]{20, 10, 10, 10, 10, 10, 10, 10, 10, 10});
+		System.out.println("Init " + init.toString());
 		
 		ParameterSet best = (ParameterSet) cuckoo.start(init);
 		

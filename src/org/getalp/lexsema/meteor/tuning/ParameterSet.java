@@ -9,14 +9,13 @@ public class ParameterSet implements CuckooNest
 {
     private static final Random random = new Random();
 
-	private int[] parameters;
+	private static ParameterSetScorer scorer = new ParameterSetScorer("cache.txt");
 	
-	private ParameterSetScorer scorer;
+	private int[] parameters;
 	
 	public ParameterSet(int[] parameters)
 	{
 		this.parameters = parameters.clone();
-		this.scorer = new ParameterSetScorer("cache.txt");
 	}
 	
 	@Override

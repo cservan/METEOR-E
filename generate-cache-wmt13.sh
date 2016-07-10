@@ -16,7 +16,7 @@ for SET in $(ls $PLAIN/system-outputs) ; do
             SYS=$(echo $SYS | sed -re "s/$SET.//;s/$LANG-en.//")
             REF=$PLAIN/references/$SET-ref.$LANG
             echo -n "$HYP $REF $LANG-en $SET $SYS "
-            java -Xmx2G -cp lib/lexsema-wsd-core.jar:meteor-1.5-DBnary-Embeddings-TT.jar Meteor $HYP $REF -l en -embLemma monolingual_vectors.lem -norm -m "$MODULES" -w '1 1 1 1 1 1' -p '1 1 1 1' -generate-cache # 2> /dev/null
+            java -Xmx2G -cp lib/lexsema-wsd-core.jar:meteor-1.5-DBnary-Embeddings-TT.jar Meteor $HYP $REF -l en -embLemma monolingual_vectors.lem -norm -m "$MODULES" -w '1 1 1 1 1 1' -p '1 1 1 1' -generate-cache 2> /dev/null
         done
     done
 done

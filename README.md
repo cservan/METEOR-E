@@ -1,7 +1,7 @@
 # METEOR-E
 
 An enhanced version of the METEOR metric V1.5 (http://www.cs.cmu.edu/~alavie/METEOR/) with DBnary and Word Embeddings.
-
+Works with java 8. Other versions of java has not been tested yet.
 
 ## Language supported
 

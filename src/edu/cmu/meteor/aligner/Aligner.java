@@ -260,7 +260,7 @@ public class Aligner {
 		this.language = Constants.normLanguageName(language);
 		this.moduleCount = modules.size();
 		this.modules = modules;
-		System.err.println(modules.toString());
+
 		this.moduleWeights = new ArrayList<Double>();
 		for (int i = 0; i < this.modules.size(); i++) {
 			int module = this.modules.get(i);

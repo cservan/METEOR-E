@@ -75,7 +75,7 @@ public class Constants {
 	public static final double DEFAULT_WEIGHT_SYNONYM = 1.0;
 	public static final double DEFAULT_WEIGHT_PARAPHRASE = 1.0;
 	public static final double DEFAULT_WEIGHT_EMBEDDINGS = 1.0;
-	public static final double DEFAULT_THRESHOLD_EMBEDDINGS = 0.4;
+	public static final double DEFAULT_THRESHOLD_EMBEDDINGS = 0.8;
 
 	public static final int DEFAULT_BEAM_SIZE = 40;
 
@@ -84,6 +84,12 @@ public class Constants {
 
 	public static final URL DEFAULT_SYN_DIR_URL = ClassLoader
 			.getSystemResource("synonym");
+
+	public static final URL DEFAULT_DBNARY_DIR_URL = ClassLoader
+			.getSystemResource("synonym-DBnary");
+
+	public static final URL DEFAULT_EMB_DIR_URL = ClassLoader
+			.getSystemResource("word-embeddings");
 
 	public static final URL DEFAULT_WORD_DIR_URL = ClassLoader
 			.getSystemResource("function");

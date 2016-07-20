@@ -39,7 +39,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.regex.Pattern;
-
+import java.io.PrintStream;
 /**
  * Main TreeTagger wrapper class. One TreeTagger process will be created and
  * maintained for each instance of this class. The associated process will be

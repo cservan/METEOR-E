@@ -40,6 +40,7 @@ public class SynonymMatcher {
 			System.err.println(a.lemma2.size());
 			System.exit(1);
 		}
+		
 		// Line 1
 		for (int i = 0; i < a.words1.size(); i++) {
 			HashSet<Integer> set = new HashSet<Integer>(synonyms

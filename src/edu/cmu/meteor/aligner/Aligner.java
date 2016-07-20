@@ -13,6 +13,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.io.OutputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -173,7 +175,7 @@ public class Aligner {
 		this.partialComparator = aligner.partialComparator;
 		this.embeddingsThreshold = aligner.embeddingsThreshold; 
 		this.embeddingsType = aligner.embeddingsType; 
-		this.ttWrapperClass = new TreeTaggerWrapperClass(this.language, "treetagger/lib/");
+		
 		for (int module : this.modules) {
 			if (module == Constants.MODULE_STEM) {
 				// Each aligner needs its own stemmer
@@ -183,9 +185,15 @@ public class Aligner {
 				this.synonyms = aligner.synonyms;
 			} else if (module == Constants.MODULE_PARAPHRASE) {
 				// Dictionaries can be shared
+				if (this.ttWrapperClass == null) {					
+					this.ttWrapperClass = new TreeTaggerWrapperClass(this.language, "treetagger/lib/");
+				}
 				this.paraphrase = aligner.paraphrase;
 			} else if (module == Constants.MODULE_EMBEDDINGS) {
 				// Dictionaries can be shared
+				if (this.ttWrapperClass == null && this.embeddingsType != 0) {					
+					this.ttWrapperClass = new TreeTaggerWrapperClass(this.language, "treetagger/lib/");
+				}
 				this.distance = aligner.distance;
 			}
 		}
@@ -198,7 +206,7 @@ public class Aligner {
 		this.moduleCount = modules.size();
 		this.modules = modules;
 		this.moduleWeights = new ArrayList<Double>();
-		this.ttWrapperClass = new TreeTaggerWrapperClass(this.language, "treetagger/lib/");
+		
 		for (int i = 0; i < this.modules.size(); i++) {
 			int module = this.modules.get(i);
 			if (module == Constants.MODULE_EXACT) {
@@ -207,6 +215,9 @@ public class Aligner {
 				this.moduleWeights.add(Constants.DEFAULT_WEIGHT_STEM);
 				this.stemmer = Constants.newStemmer(this.language);
 			} else if (module == Constants.MODULE_SYNONYM) {
+				if (this.ttWrapperClass == null) {					
+					this.ttWrapperClass = new TreeTaggerWrapperClass(this.language, "treetagger/lib/");
+				}
 				this.moduleWeights.add(Constants.DEFAULT_WEIGHT_SYNONYM);
 				try {
 					URL excFileURL = new URL(synDirURL.toString() + "/"
@@ -249,8 +260,8 @@ public class Aligner {
 		this.language = Constants.normLanguageName(language);
 		this.moduleCount = modules.size();
 		this.modules = modules;
+		System.err.println(modules.toString());
 		this.moduleWeights = new ArrayList<Double>();
-		this.ttWrapperClass = new TreeTaggerWrapperClass(this.language, "treetagger/lib/");
 		for (int i = 0; i < this.modules.size(); i++) {
 			int module = this.modules.get(i);
 			if (module == Constants.MODULE_EXACT) {
@@ -259,6 +270,9 @@ public class Aligner {
 				this.moduleWeights.add(Constants.DEFAULT_WEIGHT_STEM);
 				this.stemmer = Constants.newStemmer(this.language);
 			} else if (module == Constants.MODULE_SYNONYM) {
+				if (this.ttWrapperClass == null) {					
+					this.ttWrapperClass = new TreeTaggerWrapperClass(this.language, "treetagger/lib/");
+				}
 				this.moduleWeights.add(Constants.DEFAULT_WEIGHT_SYNONYM);
 				try {
 					URL excFileURL = new URL(synDirURL.toString() + "/"
@@ -281,6 +295,9 @@ public class Aligner {
 				this.paraphrase = new ParaphraseTransducer(paraDirURL);
 			} else if (module == Constants.MODULE_EMBEDDINGS) {
 				this.moduleWeights.add(Constants.DEFAULT_WEIGHT_EMBEDDINGS);
+				if (this.ttWrapperClass == null && this.embeddingsType != 0) {					
+					this.ttWrapperClass = new TreeTaggerWrapperClass(this.language, "treetagger/lib/");
+				}
 				try
 				{
 					this.distance = new Lib_distance(embeddingsDirURL,"UTF8");
@@ -329,7 +346,16 @@ public class Aligner {
 	private void align(Alignment a) {
 		// Set the stage for matching
 		Stage s = new Stage(a.words1, a.words2);
-		
+		boolean need_tt = false;
+		for (int m_inc = 0; m_inc < this.modules.size(); m_inc++) {
+			if ((this.modules.get(m_inc) == Constants.MODULE_SYNONYM) || (this.modules.get(m_inc) == Constants.MODULE_EMBEDDINGS && this.embeddingsType != 0)) {
+				need_tt = true;
+			}
+		}
+		PrintStream out = System.out;
+		PrintStream err = System.err;
+		System.setOut(new PrintStream(new OutputStream(){public void write(int arg0) throws IOException{}}));
+		System.setErr(new PrintStream(new OutputStream(){public void write(int arg0) throws IOException{}}));			
 		if (ttWrapperClass != null )
 		{
 			a.POS1=new ArrayList<String>();
@@ -342,7 +368,6 @@ public class Aligner {
 				tab1[i]=a.words1.get(i);
 			}
 			String out1=ttWrapperClass.tag(tab1);
-//			System.err.println("OUT1 " + out1);
 			
 			String[] tab2=new String[a.words2.size()];			
 			for (int i=0; i< a.words2.size(); i++)
@@ -350,27 +375,18 @@ public class Aligner {
 				tab2[i]=a.words2.get(i);
 			}						
 			String out2=ttWrapperClass.tag(tab2);
-//			System.err.println("OUT2 " + out2);
-//			System.exit(0);
 			String[] tabout1 = out1.split("\n");			
 			for (int i=0; i< tabout1.length; i++)
 			{
 				String[] _tabout1 = tabout1[i].split("\t");
 				for (int j=0; j< _tabout1.length; j++)
 				{
-//					System.err.println(_tabout1[j]);
 					if ((j+1) % 2 == 0)
 					{
-//						System.err.print(j);
-//						System.err.print("\t");
-//						System.err.println("POS "+_tabout1[j]);
 						a.POS1.add((String)ttWrapperClass.hashTTPOS2UPOS.get(_tabout1[j]));
 					}
 					if ((j+1) % 3 == 0)
 					{
-//						System.err.print(j);
-//						System.err.print("\t");
-//						System.err.println("Lemma "+_tabout1[j]);
 						a.lemma1.add(_tabout1[j]);
 					}					
 				}
@@ -381,47 +397,24 @@ public class Aligner {
 				String[] _tabout2 = tabout2[i].split("\t");
 				for (int j=0; j< _tabout2.length; j++)
 				{
-//					System.err.println(_tabout2[j]);
 					if ((j+1) % 2 == 0)
 					{
-/*						System.err.print(j);
-						System.err.print("\t");
-						System.err.println("POS "+_tabout2[j]);*/
 						a.POS2.add((String)ttWrapperClass.hashTTPOS2UPOS.get(_tabout2[j]));
 					}
 					if ((j+1) % 3 == 0)
 					{
-/*						System.err.print(j);
-						System.err.print("\t");
-						System.err.println("Lemma "+_tabout2[j]);*/
 						a.lemma2.add(_tabout2[j]);
 					}					
 				}
 			}
-/*
-			System.err.println("POS");
-			for (int i=0; i< a.POS1.size(); i++)
-			{
-				System.err.println(a.POS1.get(i));
-			}
-			for (int i=0; i< a.POS2.size(); i++)
-			{
-				System.err.println(a.POS2.get(i));
-			}
-			System.err.println("LEMMAS");
-			for (int i=0; i< a.lemma1.size(); i++)
-			{
-				System.err.println(a.lemma1.get(i));
-			}
-			for (int i=0; i< a.lemma2.size(); i++)
-			{
-				System.err.println(a.lemma2.get(i));
-			}*/
 		}
 		else
 		{
-			System.err.println("TreeTagger output are empty, please check your installation!");
-			System.exit(1);
+			if (need_tt) 
+			{
+				System.err.println("TreeTagger output are empty, please check your installation!");
+				System.exit(1);
+			}
 		}
 //		System.exit(0);		
 
@@ -604,6 +597,10 @@ public class Aligner {
 
 		double avgMatches = ((double) (a.line1Matches + a.line2Matches)) / 2;
 		a.avgChunkLength = (a.numChunks > 0) ? avgMatches / a.numChunks : 0;
+
+		System.setOut(out);
+		System.setErr(err);
+
 	}
 
 	// Beam search for best alignment

@@ -1,7 +1,7 @@
 # METEOR-E
 
 An enhanced version of the METEOR metric V1.5 (http://www.cs.cmu.edu/~alavie/METEOR/) with DBnary and Word Embeddings.
-
+Works with java 8. Other versions of java has not been tested yet.
 
 ## Language supported
 
@@ -45,3 +45,9 @@ When using this toolkit with Word Embeddings please cite:
 with DBnary, please cite:
  
  + METEOR for Multiple Target Languages using DBnary – Zied Elloumi, Hervé Blanchon, Gilles Sérasset and Laurent Besacier, MT Summit 2015, Miami, Florida, USA, Nov 2015.
+
+## Links
+
+ + MultiVec: https://github.com/eske/multivec
+ + TERcpp-E (WER-E & TER-E) : https://github.com/cservan/tercpp-embeddings
+

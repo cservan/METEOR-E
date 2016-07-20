@@ -1,9 +1,11 @@
 Requirements:
 -------------
 
+First, install Treetagger with the script get_treetagger.bash
+
 To run Meteor:
 
-Java JDK 1.5 or above.  Java 1.6 update 14 or above is recommended to
+Java JDK 1.8 or above is recommended to
 take advantage of compressed object pointers to reduce memory usage:
 http://java.sun.com/javase/downloads/index.jsp
 

@@ -104,18 +104,23 @@ public class EmbeddingsMatcher {
 					switch(type)
 					{
 					case 0:
+						// embedddings on surface form
 						l_prob = d.getSimilarityProb(a.words1.get(i),a.words2.get(j));
 						break;
 					case 1:
+						// embedddings on lemma
 						l_prob = d.getSimilarityProb(a.lemma1.get(i),a.lemma2.get(j));
 						break;
 					case 2:
+						// embedddings on words and POS like: is_VB
 						l_prob = d.getSimilarityProb(a.words1.get(i)+"_"+a.POS1.get(i),a.words2.get(j)+"_"+a.POS2.get(j));
 						break;
 					case 3:
+						// embedddings on lemma and POS like: be_VB
 						l_prob = d.getSimilarityProb(a.lemma1.get(i)+"_"+a.POS1.get(i),a.lemma2.get(j)+"_"+a.POS2.get(j));
 						break;
 					case 4:
+						// embedddings on word and lemma like: is_be
 						l_prob = d.getSimilarityProb(a.words1.get(i)+"_"+a.lemma1.get(i),a.words2.get(j)+"_"+a.lemma2.get(j));
 						break;
 					}

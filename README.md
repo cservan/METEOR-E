@@ -27,23 +27,33 @@ To reproduce experiements proposed in our work:
 
  + METEOR Baseline: the METEOR score is estimated using Exact, Stem, Synonym and Paraphrase modules for English as a target language and Exact, Stem and Paraphrase modules for other target languages:
  
-	java -jar meteor-1.5-DBnary-Embeddings-TT.jar hypothesis reference -l en -m 'exact stem synonym paraphrase' -norm
+ 
+		  java -jar meteor-1.5-DBnary-Embeddings-TT.jar hypothesis reference -l en -m 'exact stem synonym paraphrase' -norm
+ 
  
  + METEOR DBnary: similar to METEOR Baseline but Synonym module is available for any target language since it uses DBnary resource instead of Wordnet: 
 
-	java -jar meteor-1.5-DBnary-Embeddings-TT.jar hypothesis reference -l fr -m 'exact stem synonym paraphrase'  -d resources/synonym-DBnary/french-synonym  -norm
+ 
+		  java -jar meteor-1.5-DBnary-Embeddings-TT.jar hypothesis reference -l fr -m 'exact stem synonym paraphrase'  -d resources/synonym-DBnary/french-synonym  -norm
 
+		  
  + METEOR Vector: the Stem and Synonym modules are replaced by the Vector module:
 
-	java -jar meteor-1.5-DBnary-Embeddings-TT.jar hypothesis reference -l fr -m 'exact embeddings paraphrase' -norm -emb resources/word-embeddings/embeddings.fr [-embTh 0.75] -w "1.0 0.8 0.6"
+ 
+		 java -jar meteor-1.5-DBnary-Embeddings-TT.jar hypothesis reference -l fr -m 'exact embeddings paraphrase' -norm -emb resources/word-embeddings/embeddings.fr [-embTh 0.75] -w "1.0 0.8 0.6"
 
+		 
  + METEOR Baseline + Vector: the METEOR Baseline configuration is augmented with the Vector module:
 
-	java -jar meteor-1.5-DBnary-Embeddings-TT.jar hypothesis reference -l en -m 'exact stem synonym paraphrase embeddings' -norm -emb resources/word-embeddings/embeddings.en [-embTh 0.75] -w "1.0 0.4 0.8 0.6 0.8"
+
+		java -jar meteor-1.5-DBnary-Embeddings-TT.jar hypothesis reference -l en -m 'exact stem synonym paraphrase embeddings' -norm -emb resources/word-embeddings/embeddings.en [-embTh 0.75] -w "1.0 0.4 0.8 0.6 0.8"
+ 
  
  + METEOR DBnary + Vector: the METEOR DBnary configuration is augmented with the Vector module:
 
-	java -jar meteor-1.5-DBnary-Embeddings-TT.jar hypothesis reference -l fr -m 'exact stem synonym paraphrase embeddings' -norm -emb resources/word-embeddings/embeddings.fr [-embTh 0.75] -w "1.0 0.4 0.8 0.6 0.8" -d resources/synonym-DBnary/french-synonym
+ 
+		java -jar meteor-1.5-DBnary-Embeddings-TT.jar hypothesis reference -l fr -m 'exact stem synonym paraphrase embeddings' -norm -emb resources/word-embeddings/embeddings.fr [-embTh 0.75] -w "1.0 0.4 0.8 0.6 0.8" -d resources/synonym-DBnary/french-synonym
+
 
 
 ## TreeTagger & TT4J

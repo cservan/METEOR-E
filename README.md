@@ -72,7 +72,7 @@ This toolkit is part of the project KEHATH (https://kehath.imag.fr/) funded by t
 
 When using this toolkit with Word Embeddings please cite:
 
- + Word2Vec vs DBnary ou comment (ré)concilier représentations distribuées et réseaux lexico-sémantiques ? Le cas de l’évaluation en traduction automatique – Christophe Servan, Zied Elloumi, Hervé Blanchon and Laurent Besacier, TALN 2016, Paris, France, Juin 2016
+ + Word2Vec vs DBnary: Augmenting METEOR using Vector Representations or Lexical Resources? – Christophe Servan, Alexandre Bérard, Zied Elloumi, Hervé Blanchon and Laurent Besacier, COLING 2016, Osaka, Japan, Dec 2016
  
 with DBnary, please cite:
  
